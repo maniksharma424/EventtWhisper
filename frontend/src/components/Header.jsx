@@ -1,4 +1,5 @@
 import { CgChevronDownO } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -29,12 +30,18 @@ const Header = () => {
         </ul>
       </div>
       <div id="get started" className="sm:w-2/5 w-1/2 flex justify-end">
-        <button className="sm:text-[14px] text-[7px] sm:w-32  border-[1px] sm:px-4 sm:rounded-2xl px-3 sm:mr-4 sm:mx-0 mx-2 rounded-md font-[500] border-black ">
+        <Link
+          className="sm:text-[14px] text-[7px] sm:w-32  border-[1px] sm:px-4 sm:rounded-2xl px-3 sm:mr-4 sm:mx-0 mx-2 rounded-md font-[500] border-black flex justify-center items-center"
+          to="/login"
+        >
           Log in
-        </button>
-        <button className="sm:text-[14px] text-[7px] sm:w-32 w-18  border-[1px] sm:px-4 sm:rounded-2xl px-3 sm:mx-0 mx-2 rounded-md font-[500] border-black bg-black text-white hover:bg-white hover:text-black ">
-          Try for free{" "}
-        </button>
+        </Link>
+        <Link
+          to="/login"
+          className="sm:text-[14px] text-[7px] sm:w-32 w-18  border-[1px] sm:px-4 sm:rounded-2xl px-3 sm:mx-0 mx-2 rounded-md font-[500] border-black bg-black text-white hover:bg-white hover:text-black flex justify-center items-center"
+        >
+          Try for free
+        </Link>
       </div>
     </div>
   );

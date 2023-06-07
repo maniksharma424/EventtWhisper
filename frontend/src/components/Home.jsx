@@ -3,6 +3,7 @@ import { FaStopCircle } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MICROSOFT_IMG, PAYPAL_IMG, ZOOM_IMG } from "../constants/constants";
 import Avatar from "react-avatar";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -69,12 +70,12 @@ const Home = () => {
             id="get-Started-btns"
             className="w-1/2 h-1/3 flex justify-between items-center"
           >
-            <button className="text-white sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-black border-[1px]">
+            <Link className="text-white sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-black border-[1px] flex justify-center items-center">
               Try for free
-            </button>
-            <button className=" sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-[#c599f2] border-[1px] text-black">
+            </Link>
+            <Link className=" sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-[#c599f2] border-[1px] text-black flex justify-center items-center">
               Learn more
-            </button>
+            </Link>
           </div>
           <div
             id="trusted-by"
@@ -138,7 +139,8 @@ const Home = () => {
             </button>
             <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
-              <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Unlock event management
+              <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Unlock
+              event management
             </button>
             <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
