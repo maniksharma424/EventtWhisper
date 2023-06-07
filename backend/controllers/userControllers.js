@@ -65,15 +65,15 @@ const logOutUser = asyncHandler(async (req, res) => {
 //@desc GetUSerProfile
 //Route GET /api/user/profile
 // PRIVATE
-const getUserProfile = asyncHandler(async (req, res) => {
-  console.log(req.user);
-  const userProfile = {
-    id: req.user._id,
-    name: req.user.name,
-    phone: req.user.phone,
-  };
-  res.status(200).json(userProfile);
-});
+// const getUserProfile = asyncHandler(async (req, res) => {
+//   console.log(req.user);
+//   const userProfile = {
+//     id: req.user._id,
+//     name: req.user.name,
+//     phone: req.user.phone,
+//   };
+//   res.status(200).json(userProfile);
+// });
 
 //@desc UpdateUSerProfile
 //Route PUT /api/user/profile
