@@ -70,7 +70,7 @@ const Home = () => {
             id="get-Started-btns"
             className="w-1/2 h-1/3 flex justify-between items-center"
           >
-            <Link className="text-white sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-black border-[1px] flex justify-center items-center">
+            <Link to='/login' className="text-white sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-black border-[1px] flex justify-center items-center">
               Try for free
             </Link>
             <Link className=" sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-[#c599f2] border-[1px] text-black flex justify-center items-center">
