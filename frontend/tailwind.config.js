@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily:{
-        body:['PT+Sans']
+        body:['PT+Sans'],
+        calendar:['Nunito']
       }
     },
     

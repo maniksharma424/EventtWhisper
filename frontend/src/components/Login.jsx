@@ -9,10 +9,10 @@ const Login = () => {
               {" "}
               {"\u2B24"}
             </span>{" "}
-            <Link to="/">MY_CAL</Link>
+            <Link to="/">MY CAL</Link>
           </p>
           <p className="sm:absolute sm:text-[15px] text-[10px] absolute bottom-[540px] left-4  sm:top-[700px] sm:left-[170px] text-gray-500">
-            &copy; MY_CAL 2023
+            &copy; MY CAL 2023
           </p>
 
           <div className=" w-2/3 sm:h-2/3 h-full flex flex-col justify-evenly items-start ">
