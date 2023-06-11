@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className=" w-full h-[820px] ">
+      <div className=" w-full h-[820px] font-calendar ">
         <div
           id="header"
           className="w-full h-16 border-b-[1px] border-gray-300 flex "
