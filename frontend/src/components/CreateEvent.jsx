@@ -3,10 +3,14 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { defaultOpacity, removeBlur } from "../slices/dashboardSlice";
+import { useNavigate } from "react-router-dom";
 const CreateEvent = ({ day, month, year,hideEventSchdeuler }) => {
   const dispatch = useDispatch()
 
-  return (
+
+
+
+ return (
     <div className="sm:w-[550px] sm:h-[600px] h-[450px] border-[1px] sm:shadow-2xl sm:rounded-lg absolute sm:top-[150px] sm:left-[450px] top-[130px] left-[40px] bg-white flex flex-col p-7 justify-around items-center ">
       <h1 className="sm:text-[25px] text-[20px] sm:font-[600] w-full flex justify-between items-center">
     Create Event
@@ -102,6 +106,8 @@ const CreateEvent = ({ day, month, year,hideEventSchdeuler }) => {
      
     </div>
   );
+ 
 };
+
 
 export default CreateEvent;

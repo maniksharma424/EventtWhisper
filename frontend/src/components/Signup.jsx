@@ -60,12 +60,12 @@ const Signup = () => {
                 className="w-1/5 h-3/5 rounded-full"
               />
             </div>
-            <div className="sm:w-3/5 w-4/5 flex flex-col justify-center items-center">
+            <div className="sm:w-4/5 w-4/5 flex flex-col justify-center items-center">
               <h2 className="sm:text-[30px] sm:font-[500] text-[20px] font-[300]">
                 Welcome
               </h2>
               <p className="sm:text-[12px] mt-1  text-[7px] text-gray-400">
-                Please enter your details to get started
+                Please enter your details to get started with MY CAL
               </p>
             </div>
             <div className="w-full">

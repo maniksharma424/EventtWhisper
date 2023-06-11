@@ -95,7 +95,7 @@ const Calendar = () => {
         id="calendar-days"
         className="flex  justify-between mt-4 sm:px-28  w-full"
       >
-        {weekdays.map((day) => (
+        {weekdays?.map((day) => (
           <li key={day} className="w-1/6 text-center ">
             {day}
           </li>
@@ -105,7 +105,7 @@ const Calendar = () => {
         id="calendar-dates"
         className="flex flex-wrap  h-fit mt-4 sm:px-28 font-[600] "
       >
-        {emptyDays.map((day) => (
+        {emptyDays?.map((day) => (
           <li
             key={`previous_${day}`}
             className="sm:w-[173px] w-[59px] sm:h-36 h-16 flex justify-center text-center border-[1px] border-gray-200 text-gray-300"
@@ -113,7 +113,7 @@ const Calendar = () => {
             <span className="mt-2">{day}</span>
           </li>
         ))}
-        {monthDays.map((day) => (
+        {monthDays?.map((day) => (
           <Day
           key={day}
             day={day}
