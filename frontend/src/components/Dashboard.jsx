@@ -11,6 +11,7 @@ import Profile from "./Profile";
 import Pricing from "./Pricing";
 import FeedBack from "./FeedBack";
 import Events from "./Events";
+import { useSelector } from "react-redux";
 const Dashboard = () => {
   const [showWidget, setShowWidget] = useState({
     isCalendar: true,
@@ -20,9 +21,11 @@ const Dashboard = () => {
     isProfile: false,
   });
 
+  const opacity = useSelector((state)=>state.dashboardSlice.opacity)
+  const blur = useSelector((state)=>state.dashboardSlice.blur)
   return (
     <>
-      <div className=" w-full h-[820px] font-calendar ">
+      <div className={` w-full h-[820px] font-calendar ${opacity} ${blur} `}>
         <div
           id="header"
           className="w-full h-16 border-b-[1px] border-gray-300 flex "

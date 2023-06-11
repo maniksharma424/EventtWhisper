@@ -1,9 +1,45 @@
 import { Link } from "react-router-dom";
-
+import { useRegisterMutation } from "../slices/usersApiSlice";
+import { useDispatch,useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setCredentials } from "../slices/authSlice";
+import { toast } from "react-toastify";
+import { useState,useEffect } from "react";
 const Signup = () => {
+
+  const [name, setName] = useState("");
+  const [phone, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confrimPassword, setConfirmPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
+
+  const submitHandler = async () => {
+
+    try {
+      const res = await register({name, phone, password }).unwrap();
+
+      dispatch(setCredentials({ ...res }));
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   return (
     <>
-      <div className="w-full sm:h-[830px] h-[360px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0]">
+      <div className="w-full sm:h-[830px] h-[460px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0]">
         <div className=" sm:w-2/5 sm:h-4/5 w-full h-full sm:rounded-l-xl flex  justify-center items-center bg-white shadow-xl">
           <p className="sm:absolute sm:top-[110px] sm:text-[15px] text-[10px] sm:left-[170px] font-[500] absolute left-4 top-4">
             <span className="sm:text-[10px] text-[5px] relative bottom-0.5 sm:relative sm:bottom-0.5">
@@ -12,7 +48,7 @@ const Signup = () => {
             </span>
             <Link to="/">MY_CAL</Link>
           </p>
-          <p className="sm:absolute sm:text-[15px] text-[10px] absolute bottom-[540px] left-4  sm:top-[700px] sm:left-[170px] text-gray-500">
+          <p className="sm:absolute sm:text-[15px] text-[10px] absolute bottom-[440px] left-4  sm:top-[700px] sm:left-[170px] text-gray-500">
             &copy; MY_CAL 2023
           </p>
 
@@ -34,9 +70,27 @@ const Signup = () => {
             </div>
             <div className="w-full">
               <p className="sm:text-[13px] text-[10px] sm:font-[600] text-gray-700">
-                Phone
+                Name
               </p>
               <input
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+                type="text"
+                className=" sm:mt-2 mt-1 border-[1px] rounded-md sm:text-[11px] sm:py-1.5 sm:px-1 text-[6px] px-1 py-1  sm:font-[400] border-black w-4/5"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div className="w-full">
+              <p className="sm:text-[13px] text-[10px] sm:font-[600] text-gray-700">
+                Phone number
+              </p>
+              <input
+              value={phone}
+              onChange={(e) => {
+                setPhoneNumber(e.target.value);
+              }}
                 type="text"
                 className=" sm:mt-2 mt-1 border-[1px] rounded-md sm:text-[11px] sm:py-1.5 sm:px-1 text-[6px] px-1 py-1  sm:font-[400] border-black w-4/5"
                 placeholder="Enter your phone number"
@@ -44,12 +98,30 @@ const Signup = () => {
             </div>
             <div className="w-full">
               <p className="sm:text-[13px] text-[10px] sm:font-[600] text-gray-700">
-                Passowrd
+                Password
               </p>
               <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
                 type="text"
                 className=" sm:mt-2 mt-1 border-[1px] rounded-md sm:text-[11px] sm:py-1.5 sm:px-1 text-[6px] px-1 py-1  sm:font-[400] border-black w-4/5"
-                placeholder="Set your password"
+                placeholder="Set your Password"
+              />
+            </div>
+            <div className="w-full">
+              <p className="sm:text-[13px] text-[10px] sm:font-[600] text-gray-700">
+               Confirm passowrd
+              </p>
+              <input
+               value={confrimPassword}
+               onChange={(e) => {
+                 setConfirmPassword(e.target.value);
+               }}
+                type="text"
+                className=" sm:mt-2 mt-1 border-[1px] rounded-md sm:text-[11px] sm:py-1.5 sm:px-1 text-[6px] px-1 py-1  sm:font-[400] border-black w-4/5"
+                placeholder="Confirm your password"
               />
             </div>
 
@@ -61,7 +133,11 @@ const Signup = () => {
               {/* <span className="text-[#752ed9] ">Forgot passowrd</span> */}
             </div>
 
-            <button className="text-[10px] sm:text-[15px]  w-4/5 rounded-md py-1 bg-[#752ed9] text-white">
+            <button
+            onClick={()=>{
+              submitHandler()
+            }}
+            className="text-[10px] sm:text-[15px]  w-4/5 rounded-md py-1 bg-[#752ed9] text-white">
               Sign up
             </button>
 

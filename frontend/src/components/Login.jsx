@@ -1,5 +1,39 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "../slices/usersApiSlice";
+import { useEffect } from "react";
+import { setCredentials } from "../slices/authSlice";
+import { toast } from "react-toastify";
+
 const Login = () => {
+  const [phone, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
+
+  const submitHandler = async () => {
+
+    try {
+      const res = await login({ phone, password }).unwrap();
+
+      dispatch(setCredentials({ ...res }));
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   return (
     <>
       <div className="w-full sm:h-[830px] h-[360px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0]">
@@ -36,6 +70,11 @@ const Login = () => {
                 Phone
               </p>
               <input
+                id="phone"
+                value={phone}
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                }}
                 type="text"
                 className=" sm:mt-2 mt-1 border-[1px] rounded-md sm:text-[11px] sm:py-1.5 sm:px-1 text-[6px] px-1 py-1  sm:font-[400] border-black w-4/5"
                 placeholder="Enter your phone number"
@@ -46,7 +85,12 @@ const Login = () => {
                 Passowrd
               </p>
               <input
-                type="text"
+                id="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                type="password"
                 className=" sm:mt-2 mt-1 border-[1px] rounded-md sm:text-[11px] sm:py-1.5 sm:px-1 text-[6px] px-1 py-1  sm:font-[400] border-black w-4/5"
                 placeholder="Enter your password"
               />
@@ -60,7 +104,12 @@ const Login = () => {
               <span className="text-[#752ed9] ">Forgot passowrd</span>
             </div>
 
-            <button className="text-[10px] sm:text-[15px]  w-4/5 rounded-md py-1 bg-[#752ed9] text-white">
+            <button
+              onClick={() => {
+                submitHandler();
+              }}
+              className="text-[10px] sm:text-[15px]  w-4/5 rounded-md py-1 bg-[#752ed9] text-white"
+            >
               Login
             </button>
 
