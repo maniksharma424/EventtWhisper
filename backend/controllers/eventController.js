@@ -1,6 +1,5 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
-import generateToken from "../utils/generateToken.js";
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Types;
 
@@ -10,18 +9,19 @@ const { ObjectId } = mongoose.Types;
 const registerEvent = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
-    if (req.body.event) {
-      const event = JSON.parse(req.body.event);
-      event._id = new ObjectId();
 
-      user.event.push(event);
-    }
+      console.log(req.body.event);
+
+      req.body.event._id = new ObjectId();
+
+   await  user.events.push(req.body.event);
+
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       phone: updatedUser.phone,
-      event: updatedUser.event,
+      events: updatedUser.events,
     });
   } else {
     res.status(404);
@@ -40,7 +40,7 @@ const getEventDetails = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       phone: user.phone,
-      event: user.event,
+      events: user.events,
     });
   } else {
     res.status(404);
@@ -56,13 +56,13 @@ const deleteEvent = asyncHandler(async (req, res) => {
   if (user) {
     const eventId = new ObjectId(req.body.eventId); // Convert to ObjectId
 
-    user.event = user.event.filter((item) => !item._id.equals(eventId));
+    user.events = user.events.filter((item) => !item._id.equals(eventId));
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       phone: updatedUser.phone,
-      event: updatedUser.event,
+      events: updatedUser.events,
     });
   } else {
     res.status(404);
@@ -77,30 +77,32 @@ const updateEvent = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
     const eventId = new ObjectId(req.body.eventId); // Convert to ObjectId
-    const { hour, minutes, timeZone, name, description } = req.body;
+    const {day,month,year, hour, minutes, timeZone, name, description } = req.body;
 
     // Find the index of the event in the user's event array
-    const eventIndex = user.event.findIndex((item) => item._id.equals(eventId));
+    const eventIndex = user.events.findIndex((item) => item._id.equals(eventId));
     if (eventIndex === -1) {
       res.status(404);
       throw new Error("Event not found");
     }
-
     // Update the event properties
-    user.event[eventIndex].hour = hour || user.event[eventIndex].hour;
-    user.event[eventIndex].minutes = minutes || user.event[eventIndex].minutes;
-    user.event[eventIndex].timeZone =
-      timeZone || user.event[eventIndex].timeZone;
-    user.event[eventIndex].name = name || user.event[eventIndex].name;
-    user.event[eventIndex].description =
-      description || user.event[eventIndex].description;
+    user.events[eventIndex].day = day || user.events[eventIndex].day;
+    user.events[eventIndex].month = month || user.events[eventIndex].month;
+    user.events[eventIndex].year = year || user.events[eventIndex].year;
+    user.events[eventIndex].hour = hour || user.events[eventIndex].hour;
+    user.events[eventIndex].minutes = minutes || user.events[eventIndex].minutes;
+    user.events[eventIndex].timeZone =
+      timeZone || user.events[eventIndex].timeZone;
+    user.events[eventIndex].name = name || user.events[eventIndex].name;
+    user.events[eventIndex].description =
+      description || user.events[eventIndex].description;
 
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       phone: updatedUser.phone,
-      event: updatedUser.event,
+      events: updatedUser.events,
     });
   } else {
     res.status(404);

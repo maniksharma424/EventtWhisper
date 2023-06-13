@@ -4,22 +4,39 @@ import { BiTime } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { defaultOpacity, removeBlur } from "../slices/dashboardSlice";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { useAddEventMutation } from "../slices/eventApiSlice";
 
 const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
+
   const [eventTime, setEventTime] = useState({
-    hour: '03',
-    minutes: '34',
-    timeZone: 'PM',
+    hour: "03",
+    minutes: "34",
+    timeZone: "PM",
   });
 
+  const [registerEvent, { isLoading }] = useAddEventMutation();
   const dispatch = useDispatch();
 
-  const handleSubmitEventInfo = ()=>{
-    //send date too
-
-  }
+  const handleSubmitEventInfo = async () => {
+    const event = {
+      name: eventName,
+      description: eventDescription,
+      day: `${day}`,
+      month: `${month}`,
+      year: `${year}`,
+      hour: eventTime.hour,
+      minutes: eventTime.minutes,
+      timeZone: eventTime.timeZone,
+    };
+    try {
+      const res = await registerEvent({ event }).unwrap();
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <div className="sm:w-[550px] sm:h-[600px] h-[450px] border-[1px] sm:shadow-2xl sm:rounded-lg absolute sm:top-[150px] sm:left-[450px] top-[130px] left-[40px] bg-white flex flex-col p-7 justify-around items-center ">
@@ -37,19 +54,19 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
         </button>
       </h1>
       <div className="h-1/6 w-full sm:text-[15px] text-[12px]  flex flex-col justify-around">
-        <p className="text-gray-600">Event Name</p>
+        <p className="text-gray-600">Event Name </p>
         <input
           type="text"
           value={eventName}
           onChange={(e) => {
             setEventName(e.target.value);
           }}
-          className=" w-full border-[1px] bg-gray-100  sm:font-[300] sm:p-2 p-1 sm:shadow-md rounded-md  "
+          className=" w-full border-[1px] bg-gray-100  sm:font-[300] sm:p-2 p-1 sm:shadow-md rounded-md "
           placeholder="Enter event name"
         />
       </div>
       <div className="h-1/4 w-full  flex flex-col justify-around sm:text-[15px] text-[12px]">
-        <p className="text-gray-600">Description</p>
+        <p className="text-gray-600">Description </p>
         <textarea
           value={eventDescription}
           onChange={(e) => {
@@ -57,7 +74,7 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
           }}
           type="text"
           className=" w-full h-3/5 border-[1px] bg-gray-100 sm:font-[300] sm:p-2 p-1 sm:shadow-md rounded-md  "
-          placeholder="Enter event name"
+          placeholder="Enter event description"
         />
       </div>
       <div
@@ -142,16 +159,20 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
           </div>
         </div>
         <p className="text-[10px] tracking-wider mt-1 text-gray-500">
-          This event will take place on {`${day} ${monthNames[month]} ,${year}at ${eventTime.hour}:${eventTime.minutes}${eventTime.timeZone}  ` }         </p>
+          This event will take place on{" "}
+          {`${day} ${monthNames[month]} ,${year}at ${eventTime.hour}:${eventTime.minutes}${eventTime.timeZone}  `}{" "}
+        </p>
       </div>
       <div className="create-cancel-btns  w-full h-fit">
         <button
           className="border-[1px] w-full border-gray-500 px-4 py-1 rounded-2xl"
           onClick={() => {
-            dispatch(removeBlur());
-            dispatch(defaultOpacity());
-            hideEventSchdeuler();
-            handleSubmitEventInfo()
+            eventName === "" || eventDescription === ""
+              ? toast.error("Enter event name and description to create alert")
+              : handleSubmitEventInfo() &
+                dispatch(removeBlur()) &
+                dispatch(defaultOpacity()) &
+                hideEventSchdeuler();
           }}
         >
           Create

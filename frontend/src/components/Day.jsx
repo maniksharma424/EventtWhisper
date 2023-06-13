@@ -27,11 +27,11 @@ const Day = ({ day, currentDate, currentMonth, currentYear }) => {
             : navigate("/login");
         }}
         key={day}
-        className={`sm:w-[173px] w-[59px] sm:h-36 h-16 text-center border-[1px] border-gray-200 flex justify-center ${
+        className={`sm:w-[173px] w-[59px] sm:h-36 h-16 text-center flex border-[1px] justify-center ${
           day === currentDate.getDate() &&
           currentMonth === currentDate.getMonth() &&
           currentYear === currentDate.getFullYear()
-            ? "text-[#ff9d47] bg-gray-100"
+            ? "text-[#ff9d47]  border-t-[#3b3299] border-t-[2px]"
             : ""
         }`}
       >

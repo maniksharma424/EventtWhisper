@@ -14,6 +14,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       phone: user.phone,
+      events:user.events
     });
   } else {
     res.status(401);
@@ -44,6 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       phone: user.phone,
+      events:user.events
     });
   } else {
     res.status(400);
@@ -76,7 +78,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
@@ -104,7 +106,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-
 //@desc UpdateUSerProfile
 //Route DELETE /api/user/profile
 // PRIVATE
@@ -124,12 +125,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
-
 export {
   authUser,
   registerUser,
   logOutUser,
   getUserProfile,
   updateUserProfile,
-  deleteUser
+  deleteUser,
 };

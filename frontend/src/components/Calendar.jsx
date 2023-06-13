@@ -3,6 +3,7 @@ import { BiChevronRight } from "react-icons/bi";
 import { BiChevronLeft } from "react-icons/bi";
 import { BiBell } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { weekdays, monthNames } from "../constants/constants";
 import Day from "./Day";
 const Calendar = () => {
@@ -10,7 +11,7 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
 
-
+const {events} = useSelector(state=>state.eventSlice)
   const goToPreviousMonth = () => {
     setCurrentMonth((prevMonth) => {
       if (prevMonth === 0) {
@@ -87,7 +88,7 @@ const Calendar = () => {
         >
           <button className="flex justify-between items-center sm:w-1/5 w-2/5 border-[1px] sm:rounded-3xl rounded-xl px-2 h-full text-gray-700">
             <BiBell className="text-[#e3a34f] border-[1px] rounded-md border-[#3b3299]" />
-            2
+            {events.length}
           </button>
         </div>
       </div>

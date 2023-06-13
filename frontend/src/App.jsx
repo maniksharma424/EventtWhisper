@@ -25,7 +25,10 @@ const myRouter = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <>
+    <ToastContainer/>
+     <Dashboard />,
+    </>,
   },
   {
     path: "/login",

@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    event:{
+    events:{
       type:Array,
       required:false
     },
