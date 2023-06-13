@@ -77,7 +77,7 @@ const updateEvent = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
     const eventId = new ObjectId(req.body.eventId); // Convert to ObjectId
-    const {day,month,year, hour, minutes, timeZone, name, description } = req.body;
+    const {day,month,year, hour, minutes, timeZone, name, description ,active} = req.body;
 
     // Find the index of the event in the user's event array
     const eventIndex = user.events.findIndex((item) => item._id.equals(eventId));
@@ -96,6 +96,8 @@ const updateEvent = asyncHandler(async (req, res) => {
     user.events[eventIndex].name = name || user.events[eventIndex].name;
     user.events[eventIndex].description =
       description || user.events[eventIndex].description;
+    user.events[eventIndex].active =
+      active || user.events[eventIndex].active;
 
     const updatedUser = await user.save();
     res.json({

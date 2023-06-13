@@ -1,17 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BiChevronLeft } from "react-icons/bi";
 import { BiBell } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { weekdays, monthNames } from "../constants/constants";
+import { setEvents } from "../slices/eventsSlice";
 import Day from "./Day";
 const Calendar = () => {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
 
-const {events} = useSelector(state=>state.eventSlice)
+  const {events}  = useSelector((state) => state.eventSlice);
+
+  const dispatch = useDispatch();
+
+  const filteredEvents = events?.filter((event) => {
+    const eventDate = new Date(event.year, event.month, event.day);
+    return (
+      eventDate.getFullYear() === currentYear &&
+      eventDate.getMonth() === currentMonth
+    );
+  });
+
+  useEffect(() => {
+    const getEvents = async () => {
+      fetch("/api/users/events")
+        .then((res) => res.json())
+        .then((res) => dispatch(setEvents(res.events)))
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+    getEvents();
+  }, []);
+
   const goToPreviousMonth = () => {
     setCurrentMonth((prevMonth) => {
       if (prevMonth === 0) {
@@ -88,7 +112,7 @@ const {events} = useSelector(state=>state.eventSlice)
         >
           <button className="flex justify-between items-center sm:w-1/5 w-2/5 border-[1px] sm:rounded-3xl rounded-xl px-2 h-full text-gray-700">
             <BiBell className="text-[#e3a34f] border-[1px] rounded-md border-[#3b3299]" />
-            {events.length}
+            {filteredEvents?.length}
           </button>
         </div>
       </div>
@@ -114,15 +138,20 @@ const {events} = useSelector(state=>state.eventSlice)
             <span className="mt-2">{day}</span>
           </li>
         ))}
-        {monthDays?.map((day) => (
+      {monthDays?.map((day) => {
+        const dayEvents = filteredEvents.filter((event) => event.day === day.toString());
+
+        return (
           <Day
-          key={day}
+            key={day}
             day={day}
             currentDate={currentDate}
             currentMonth={currentMonth}
             currentYear={currentYear}
+            events={dayEvents}
           />
-        ))}
+        );
+      })}
       </ul>
       <div className="w-full flex justify-center items-center mt-10 font-[800]">
         &copy; MYCAL 2023

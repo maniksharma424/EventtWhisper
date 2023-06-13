@@ -6,6 +6,7 @@ import { defaultOpacity, removeBlur } from "../slices/dashboardSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAddEventMutation } from "../slices/eventApiSlice";
+import { addEvent } from "../slices/eventsSlice";
 
 const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   const [eventName, setEventName] = useState("");
@@ -22,7 +23,7 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
 
   const handleSubmitEventInfo = async () => {
     const event = {
-      name: eventName,
+      name: eventName.charAt(0).toUpperCase() + eventName.slice(1),
       description: eventDescription,
       day: `${day}`,
       month: `${month}`,
@@ -30,9 +31,11 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
       hour: eventTime.hour,
       minutes: eventTime.minutes,
       timeZone: eventTime.timeZone,
+      active:true
     };
     try {
       const res = await registerEvent({ event }).unwrap();
+      dispatch(addEvent(event))
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

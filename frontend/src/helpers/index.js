@@ -43,3 +43,48 @@ export const showProfile = (setShowWidget)=>{
         isEvents: false,
       });
 }
+
+
+
+export const handleUpcommingEvents = (events,setFilteredEvents,date)=>{
+  const upcommingEvents = events.filter(event=>parseInt(event.day) >= date.getDate() && parseInt(event.month) >= date.getMonth() )
+
+  setFilteredEvents(upcommingEvents)
+
+}
+export const handleCompletedEvents = (events,setFilteredEvents,date)=>{
+  const completedEvents = events.filter(event=>parseInt(event.day) < date.getDate() && parseInt(event.month) < date.getMonth() )
+
+  setFilteredEvents(completedEvents)
+
+}
+export const handleCancelledEvents = (events,setFilteredEvents)=>{
+
+  const cancelledEvents = events.filter(event=>event.active === false)
+
+  setFilteredEvents(cancelledEvents)
+
+}
+
+
+export const showUpcomming = (eventType,setEventType)=>{
+  setEventType({
+    upcomming:true,
+    completed:false,
+    cancelled:false
+    });
+}
+export const showCompleted = (eventType,setEventType)=>{
+  setEventType({
+    upcomming:false,
+    completed:true,
+    cancelled:false
+    });
+}
+export const showCancelled = (eventType,setEventType)=>{
+  setEventType({
+    upcomming:false,
+    completed:false,
+    cancelled:true
+    });
+}

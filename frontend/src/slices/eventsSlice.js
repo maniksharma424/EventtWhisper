@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const eventsSlice = createSlice({
   name: "eventSlice",
   initialState: {
-    events: localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo")).events
-      : null,
+    events: [],
   },
+
   reducers: {
-    setEvent: (state, action) => {
+    setEvents: (state, action) => {
+      state.events = action.payload;
+    },
+    addEvent: (state, action) => {
       state.events.push(action.payload);
     },
     deleteEvent: (state, action) => {
@@ -40,4 +42,5 @@ const eventsSlice = createSlice({
   },
 });
 export default eventsSlice.reducer;
-export const { setEvent, deleteEvent,updateEvent } = eventsSlice.actions;
+export const { setEvents, addEvent, deleteEvent, updateEvent } =
+  eventsSlice.actions;
