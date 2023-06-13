@@ -4,6 +4,7 @@ import userRoutes from './routes/userRoutes.js'
 import cookieParser from 'cookie-parser'
 import { errorHandler, notFound } from './middleware/errorMiddleWare.js'
 import connectDB from './config/db.js'
+import eventRoutes from './routes/eventRoutes.js'
 
 dotenv.config()
 connectDB()
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 app.use('/api/users',userRoutes)
+app.use('/api/users',eventRoutes)
 
 app.use(errorHandler)
 

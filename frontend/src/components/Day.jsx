@@ -31,7 +31,7 @@ const Day = ({ day, currentDate, currentMonth, currentYear }) => {
           day === currentDate.getDate() &&
           currentMonth === currentDate.getMonth() &&
           currentYear === currentDate.getFullYear()
-            ? "text-[#e3a34f]"
+            ? "text-[#ff9d47] bg-gray-100"
             : ""
         }`}
       >
