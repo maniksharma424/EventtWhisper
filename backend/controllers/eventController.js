@@ -6,7 +6,7 @@ import { cancelScheduledEvent, scheduleEvent } from "../nodeSchedule.js";
 import { updateUserInfo } from "../helpers/controllerHelper.js";
 const { ObjectId } = mongoose.Types;
 
-//@desc Register Event
+//@desc RegisterEvent
 //Route PUT /api/users/event
 // PUBLIC
 const registerEvent = asyncHandler(async (req, res) => {
