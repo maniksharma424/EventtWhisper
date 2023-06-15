@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useAddEventMutation } from "../slices/eventApiSlice";
 import { addEvent } from "../slices/eventsSlice";
 
+
 const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -17,6 +18,7 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
     minutes: "34",
     timeZone: "PM",
   });
+
 
   const [registerEvent, { isLoading }] = useAddEventMutation();
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
     try {
       const res = await registerEvent({ event }).unwrap();
       dispatch(addEvent(event))
+      // location.reload()
+
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

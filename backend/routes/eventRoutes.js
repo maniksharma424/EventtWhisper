@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.route('/events').get(protect,getEventDetails).put(protect,registerEvent)
 router.route('/events').delete(protect,deleteEvent)
-router.route('/events').patch(protect,updateEvent)
+router.route('/events/update').put(protect,updateEvent)
 
 
 export default router

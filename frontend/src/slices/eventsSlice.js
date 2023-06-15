@@ -14,30 +14,32 @@ const eventsSlice = createSlice({
       state.events.push(action.payload);
     },
     deleteEvent: (state, action) => {
-      state.events.filter((event) => event._id !== action.payload._id);
+     state.events =  state.events.filter((event) => event._id !== action.payload._id);
     },
     updateEvent: (state, action) => {
-      const eventIndex = state.events.findIndex((item) =>
-        item._id.equals(action.payload._id)
+      console.log('update event slice');
+      const index = state.events.findIndex((item) =>
+        item._id === action.payload._id
       );
-      if (eventIndex === -1) {
+      if (index === -1) {
         throw new Error("Event not found");
       }
       // Update the event properties
 
-      const { day, month, year, hour, minutes, timeZone, name, description } =
+      const { day, month, year, hour, minutes, timeZone, name, description,active } =
         action.payload;
-      state.events[eventIndex].day = day || state.events[eventIndex].day;
-      state.events[eventIndex].month = month || state.events[eventIndex].month;
-      state.events[eventIndex].year = year || state.events[eventIndex].year;
-      state.events[eventIndex].hour = hour || state.events[eventIndex].hour;
-      state.events[eventIndex].minutes =
-        minutes || state.events[eventIndex].minutes;
-      state.events[eventIndex].timeZone =
-        timeZone || state.events[eventIndex].timeZone;
-      state.events[eventIndex].name = name || state.events[eventIndex].name;
-      state.events[eventIndex].description =
-        description || state.events[eventIndex].description;
+      state.events[index].day = day || state.events[index].day;
+      state.events[index].month = month || state.events[index].month;
+      state.events[index].year = year || state.events[index].year;
+      state.events[index].hour = hour || state.events[index].hour;
+      state.events[index].minutes =
+        minutes || state.events[index].minutes;
+      state.events[index].timeZone =
+        timeZone || state.events[index].timeZone;
+      state.events[index].name = name || state.events[index].name;
+      state.events[index].description =
+        description || state.events[index].description;
+        state.events[index].active = active 
     },
   },
 });

@@ -35,6 +35,7 @@ const Calendar = () => {
     };
     getEvents();
   }, []);
+  
 
   const goToPreviousMonth = () => {
     setCurrentMonth((prevMonth) => {
@@ -67,7 +68,7 @@ const Calendar = () => {
   );
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-  const emptyDays = Array.from({ length: firstDayOfMonth }, (_, index) => {
+  const previousDays = Array.from({ length: firstDayOfMonth }, (_, index) => {
     const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
     const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
     const daysInPreviousMonth = new Date(
@@ -130,7 +131,7 @@ const Calendar = () => {
         id="calendar-dates"
         className="flex flex-wrap  h-fit mt-4 sm:px-28 font-[600] "
       >
-        {emptyDays?.map((day) => (
+        {previousDays?.map((day) => (
           <li
             key={`previous_${day}`}
             className="sm:w-[173px] w-[59px] sm:h-36 h-16 flex justify-center text-center border-[1px] border-gray-200 text-gray-300"

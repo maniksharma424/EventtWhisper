@@ -19,8 +19,8 @@ export const eventsApiSlice = apiSlice.injectEndpoints({
     }),
     updateEvent: builder.mutation({
       query: (data) => ({
-        url: `${EVENTS_URL}`,
-        method: "PATCH",
+        url: `${EVENTS_URL}/update`,
+        method: "PUT",
         body:data
       }),
     }),

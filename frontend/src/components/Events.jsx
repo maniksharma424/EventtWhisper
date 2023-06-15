@@ -1,44 +1,34 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   handleUpcommingEvents,
-  handleCancelledEvents,
+  handleSnoozedEvents,
   handleCompletedEvents,
+  sortObjectsByMonthAndDate,
 } from "../helpers";
 import { showUpcomming, showCompleted, showCancelled } from "../helpers";
-import EventCard from "./EventCard";
-const Events = () => {
 
-  const [events, setEvents] = useState([]);
+import EventCard from "./EventCard";
+import { monthNames } from "../constants/constants";
+const Events = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
 
   const [eventType, setEventType] = useState({
     upcomming: true,
     completed: false,
-    cancelled: false,
+    snoozed: false,
   });
 
+  const { events } = useSelector((state) => state.eventSlice);
+
+  console.log("i was rendered");
   const date = new Date();
   useEffect(() => {
-    const getEvents = async () => {
-      fetch("/api/users/events")
-        .then((res) => res.json())
-        .then((res) => {
-          const upcommingEvents = res.events.filter(
-            (event) =>
-              parseInt(event.day) >= date.getDate() &&
-              parseInt(event.month) >= date.getMonth()
-          );
-            setEvents(res?.events)
-          setFilteredEvents(upcommingEvents);
-        })
-        .catch((err) => {
-          throw new Error(err);
-        });
-    };
-    getEvents();
-  }, []);
-  console.log(events);
-  console.log(date.getDate());
+    const upcommingEvents = events.filter(
+      (event) => parseInt(event.month) >= date.getMonth()
+    );
+    setFilteredEvents(upcommingEvents);
+  }, [events]);
 
   return (
     <div className="w-full h-full  sm:px-20 sm:py-10 px-2 py-2">
@@ -79,17 +69,35 @@ const Events = () => {
         <button
           onClick={() => {
             showCancelled(eventType, setEventType);
-            handleCancelledEvents(events, setFilteredEvents);
+            handleSnoozedEvents(events, setFilteredEvents);
           }}
           className={`px-2 py-1 mx-1 rounded-lg ${
-            eventType.cancelled ? "bg-white" : "bg-gray-100 text-[#C7C6C6]"
+            eventType.snoozed ? "bg-white" : "bg-gray-100 text-[#C7C6C6]"
           }`}
         >
-          Cancelled
+          Snoozed
         </button>
       </div>
       <div className="w-full h-fit">
-      {filteredEvents?.map((event,index)=><EventCard key={index} event={event}/>)}
+        {sortObjectsByMonthAndDate(filteredEvents)?.map(
+          (event, index, array) => {
+            const currentMonth = parseInt(event.month);
+            const previousMonth =
+              index > 0 ? parseInt(array[index - 1].month) : null;
+            if (previousMonth !== currentMonth) {
+              const monthName = monthNames[currentMonth];
+              return (
+                <div className="mt-5" key={`month-${currentMonth}`}>
+                  <h2 className="text-[#141414] sm:text-[20px] text-[15px] font-[600]">
+                    {monthName}
+                  </h2>
+                  <EventCard index={index} key={index} event={event} />
+                </div>
+              );
+            }
+            return <EventCard index={index} key={index} event={event} />;
+          }
+        )}
       </div>
     </div>
   );
