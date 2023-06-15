@@ -37,7 +37,7 @@ const Header = () => {
           Log in
         </Link>
         <Link
-          to="/login"
+          to="/dashboard"
           className="sm:text-[14px] text-[7px] sm:w-32 w-18  border-[1px] sm:px-4 sm:rounded-2xl px-3 sm:mx-0 mx-2 rounded-md font-[500] border-black bg-black text-white hover:bg-white hover:text-black flex justify-center items-center"
         >
           Try for free

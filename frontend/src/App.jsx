@@ -6,6 +6,9 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 function App() {
   return (
     <>
@@ -26,11 +29,17 @@ const myRouter = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <>
+    <ToastContainer/> 
+    <Login />
+    </>,
   },
   {
     path: "/register",
-    element: <Signup />,
-  }
+    element:<>
+    <ToastContainer/>
+     <Signup />,
+    </>
+  },
 ]);
 export default myRouter;

@@ -10,7 +10,7 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ phone });
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
-    res.status(201).json({
+    res.json({
       _id: user._id,
       name: user.name,
       phone: user.phone,
@@ -66,13 +66,18 @@ const logOutUser = asyncHandler(async (req, res) => {
 //Route GET /api/user/profile
 // PRIVATE
 const getUserProfile = asyncHandler(async (req, res) => {
-  console.log(req.user);
-  const userProfile = {
-    id: req.user._id,
-    name: req.user.name,
-    phone: req.user.phone,
-  };
-  res.status(200).json(userProfile);
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      phone: user.phone,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
 });
 
 //@desc UpdateUSerProfile
@@ -88,7 +93,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.password = req.body.password;
     }
     const updatedUser = await user.save();
-    res.status(200).json({
+    res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       phone: updatedUser.phone,
