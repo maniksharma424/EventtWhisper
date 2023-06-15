@@ -155,7 +155,6 @@ const Dashboard = () => {
               <button>
                 <AiOutlineLogout
                   onClick={() => {
-                    console.log("hi");
                     logoutHandler();
                   }}
                   className="sm:text-[22px] text-[10px] text-black"

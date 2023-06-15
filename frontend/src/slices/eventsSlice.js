@@ -17,7 +17,6 @@ const eventsSlice = createSlice({
      state.events =  state.events.filter((event) => event._id !== action.payload._id);
     },
     updateEvent: (state, action) => {
-      console.log('update event slice');
       const index = state.events.findIndex((item) =>
         item._id === action.payload._id
       );

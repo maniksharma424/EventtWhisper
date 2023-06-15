@@ -56,7 +56,7 @@ const sendAlerts = async (name, description, phoneNumber) => {
       }
     );
 
-    console.log(response.data);
+
   } catch (error) {
     console.error(error);
   }

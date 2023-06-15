@@ -23,11 +23,8 @@ export const scheduleEvent = (event, phone) => {
   const newHour = convertTo24HourFormat(hour, timeZone);
   const jobId = new ObjectId(_id);
   const date = new Date(year, newMonth, day, newHour, minutes, 0);
-  console.log(date);
-  console.log(jobId);
   const job = schedule.scheduleJob(`${jobId}`, date, () => {
     sendAlerts(name, description, phone);
-    console.log(job);
   });
 };
 

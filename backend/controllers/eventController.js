@@ -94,7 +94,6 @@ const updateEvent = asyncHandler(async (req, res) => {
     const updatedUser = await user.save();
 
     scheduleEvent(req.body, req.user.phone);
-    console.log(user.events);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,

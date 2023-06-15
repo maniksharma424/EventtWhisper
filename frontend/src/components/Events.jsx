@@ -21,7 +21,6 @@ const Events = () => {
 
   const { events } = useSelector((state) => state.eventSlice);
 
-  console.log("i was rendered");
   const date = new Date();
   useEffect(() => {
     const upcommingEvents = events.filter(
