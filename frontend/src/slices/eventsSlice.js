@@ -14,7 +14,7 @@ const eventsSlice = createSlice({
       state.events.push(action.payload);
     },
     deleteEvent: (state, action) => {
-     state.events =  state.events.filter((event) => event._id !== action.payload._id);
+     state.events =  state.events?.filter((event) => event._id !== action.payload._id);
     },
     updateEvent: (state, action) => {
       const index = state.events.findIndex((item) =>

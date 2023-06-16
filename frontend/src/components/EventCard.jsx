@@ -26,7 +26,7 @@ const EventCard = ({ event, index }) => {
   const dayName = date.toLocaleString("en-US", options);
 
   return (
-    <div className="sm:w-5/6 h-fit border-[1px] mt-5 sm:px-3 py-1 rounded-md shadow-md ">
+    <div className="sm:w-5/6 sm:h-[90px] border-[1px] mt-5 sm:px-3 py-1 rounded-md shadow-md ">
       <div id="event-details" className="w-full h-full flex text-[#4D4D4D] ">
         <div
           id="info"
@@ -66,10 +66,10 @@ const EventCard = ({ event, index }) => {
           <div
             id="
         name-description"
-            className=" flex flex-col w-2/4 justify-start items-center "
+            className=" flex h-full  flex-col w-2/4 justify-between items-start   "
           >
-            <p className="sm:text-[17px] text-[12px]">{name}</p>
-            <p className="text-gray-500 sm:text-[12px] text-[8px] sm:mt-3 mt-1">
+            <p className="sm:text-[17px] text-[8px] h-1/2 w-full text-ellipsis overflow-hidden whitespace-nowrap sm:mb-0 mb-2">{name}</p>
+            <p className="text-gray-500 sm:text-[12px] h-1/2 w-full text-[9px]  sm:mt-3  text-ellipsis overflow-hidden whitespace-nowrap flex justify-start items-center">
               {description}
             </p>
           </div>

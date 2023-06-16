@@ -140,7 +140,7 @@ const Calendar = () => {
           </li>
         ))}
       {monthDays?.map((day) => {
-        const dayEvents = filteredEvents.filter((event) => event.day === day.toString());
+        const dayEvents = filteredEvents?.filter((event) => event.day === day.toString());
 
         return (
           <Day

@@ -47,20 +47,20 @@ export const showProfile = (setShowWidget)=>{
 
 
 export const handleUpcommingEvents = (events,setFilteredEvents,date)=>{
-  const upcommingEvents = events.filter(event=>parseInt(event.day) >= date.getDate() && parseInt(event.month) >= date.getMonth() )
+  const upcommingEvents = events?.filter(event=>parseInt(event.day) >= date.getDate() && parseInt(event.month) >= date.getMonth() )
 
   setFilteredEvents(upcommingEvents)
 
 }
 export const handleCompletedEvents = (events,setFilteredEvents,date)=>{
-  const completedEvents = events.filter(event=>parseInt(event.day) < date.getDate() && parseInt(event.month) < date.getMonth() )
+  const completedEvents = events?.filter(event=>parseInt(event.day) < date.getDate() && parseInt(event.month) < date.getMonth() )
 
   setFilteredEvents(completedEvents)
 
 }
 export const handleSnoozedEvents = (events,setFilteredEvents)=>{
 
-  const cancelledEvents = events.filter(event=>event.active === false)
+  const cancelledEvents = events?.filter(event=>event.active === false)
 
   setFilteredEvents(cancelledEvents)
 

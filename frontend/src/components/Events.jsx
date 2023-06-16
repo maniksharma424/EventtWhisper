@@ -23,7 +23,7 @@ const Events = () => {
 
   const date = new Date();
   useEffect(() => {
-    const upcommingEvents = events.filter(
+    const upcommingEvents = events?.filter(
       (event) => parseInt(event.month) >= date.getMonth()
     );
     setFilteredEvents(upcommingEvents);
