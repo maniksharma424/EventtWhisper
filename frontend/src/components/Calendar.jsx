@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { weekdays, monthNames } from "../constants/constants";
 import { setEvents } from "../slices/eventsSlice";
 import Day from "./Day";
+
 const Calendar = () => {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
