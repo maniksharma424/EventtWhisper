@@ -25,11 +25,14 @@ export const scheduleEvent = (event, phone) => {
   const date = new Date(year, newMonth, day, newHour, minutes, 0);
   const job = schedule.scheduleJob(`${jobId}`, date, () => {
     sendAlerts(name, description, phone);
-  });
+    console.log(job);
+  })
 };
 
 export const cancelScheduledEvent = (_id) => {
   const jobId = new ObjectId(_id);
   const job = schedule.scheduledJobs[`${jobId}`];
+  console.log(job);
+  console.log(_id);
   job.cancel();
 };

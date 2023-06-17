@@ -3,7 +3,7 @@ import axios from "axios";
 const sendAlerts = async (name, description, phoneNumber) => {
   try {
     const response = await axios.post(
-      "https://graph.facebook.com/v16.0/104731305941884/messages",
+      "https://graph.facebook.com/v17.0/104731305941884/messages",
       {
         messaging_product: "whatsapp",
         to: `91${phoneNumber}`,
@@ -55,7 +55,7 @@ const sendAlerts = async (name, description, phoneNumber) => {
         },
       }
     );
-
+console.log(response);
 
   } catch (error) {
     console.error(error);
