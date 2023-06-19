@@ -5,6 +5,7 @@ import { useLoginMutation } from "../slices/usersApiSlice";
 import { useEffect } from "react";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import {motion} from 'framer-motion'
 
 const Login = () => {
   const [phone, setPhoneNumber] = useState("");
@@ -104,19 +105,19 @@ const Login = () => {
               <span className="text-[#752ed9] ">Forgot passowrd</span>
             </div>
 
-            <button
+            <motion.button
               onClick={() => {
                 submitHandler();
               }}
               className="text-[10px] sm:text-[15px]  w-4/5 rounded-md py-1 bg-[#752ed9] text-white"
             >
               Login
-            </button>
+            </motion.button>
 
             <div className="flex justify-center w-4/5 sm:text-[13px] text-[7px]">
               Don't have an account?{" "}
               <Link to="/register">
-                <button className="ml-1 text-[#752ed9]">Sign up</button>
+                <motion.button className="ml-1 text-[#752ed9]">Sign up</motion.button>
               </Link>
             </div>
           </div>

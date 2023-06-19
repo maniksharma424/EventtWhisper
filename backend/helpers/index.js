@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "../models/userModel.js";
 const { ObjectId } = mongoose.Types;
 export const updateUserInfo = async (user, event) => {
   const eventId = new ObjectId(event._id); // Convert to ObjectId
@@ -32,4 +33,46 @@ export const updateUserInfo = async (user, event) => {
   user.events[index].description = await (description ||
     user.events[index].description);
   user.events[index].active = await active;
+};
+export const convertTo24HourFormat = (hour, period) => {
+  let hour24 = parseInt(hour, 10);
+
+  if (period.toLowerCase() === "pm" && hour24 !== 12) {
+    hour24 += 12;
+  } else if (period.toLowerCase() === "am" && hour24 === 12) {
+    hour24 = 0;
+  }
+
+  return hour24.toString().padStart(2, "0");
+};
+
+
+
+export const handleCompletedEvent = (USER, event) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findById(USER._id);
+      if (user) {
+        const eventId = new ObjectId(event._id);
+
+        const index = user.events.findIndex((event) => {
+          const eventObjectId = new ObjectId(event._id);
+          return eventObjectId.equals(eventId);
+        });
+
+        if (index === -1) {
+          reject(new Error(`Event not found: ${eventId}`));
+        } else {
+          user.events[index].active = false
+          user.markModified("events");
+          const updatedUser = await user.save();
+          resolve(updatedUser);
+        }
+      } else {
+        reject(new Error("User not found"));
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 };

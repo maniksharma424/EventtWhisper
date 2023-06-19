@@ -1,47 +1,36 @@
 import axios from "axios";
 
-const sendAlerts = async (name, description, phoneNumber) => {
+const sendAlerts = async (event, user) => {
   try {
     const response = await axios.post(
-      "https://graph.facebook.com/v17.0/104731305941884/messages",
+      "https://graph.facebook.com/v16.0/104731305941884/messages",
       {
         messaging_product: "whatsapp",
-        to: `91${phoneNumber}`,
+        to: `91${user?.phone}`,
         type: "template",
         template: {
-          name: "notify",
+          name: "eventalert",
           language: {
             code: "en_US",
           },
           components: [
             {
-              type: "header",
-              parameters: [
-                {
-                  type: "image",
-                  image: {
-                    link: "https://cdn.dribbble.com/users/60166/screenshots/14845227/media/5f4afd476f860e5e6443cf0bc5ba6a34.jpg?compress=1&resize=400x300",
-                  },
-                },
-              ],
-            },
-            {
               type: "body",
               parameters: [
                 {
                   type: "text",
-                  text: `${name} and ${description}`,
+                  text: `${user?.name} this is a reminder for ${event?.name} - ${event?.description}`,
                 },
               ],
             },
             {
               type: "button",
-              sub_type: "URL",
-              index: "1",
+              sub_type: "quick_reply",
+              index: "0",
               parameters: [
                 {
-                  type: "text",
-                  text: "http://stashit.netlify.app/",
+                  type: "payload",
+                  payload:'Than you for using My Cal you will not be notified for any further updates'
                 },
               ],
             },

@@ -17,6 +17,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../slices/authSlice";
 import { showCalendar, showEvents, showPricing, showProfile } from "../helpers";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
+import { setEvents } from "../slices/eventsSlice";
+import {motion} from 'framer-motion'
 const Dashboard = () => {
   const [showWidget, setShowWidget] = useState({
     isCalendar: true,
@@ -29,11 +33,12 @@ const Dashboard = () => {
   const opacity = useSelector((state) => state.dashboardSlice.opacity);
   const blur = useSelector((state) => state.dashboardSlice.blur);
 
-  const isLoggedIn = JSON.parse(localStorage.getItem('userInfo'))
+  const isLoggedIn = JSON.parse(localStorage.getItem("userInfo"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
+
 
   const logoutHandler = async () => {
     try {
@@ -44,6 +49,34 @@ const Dashboard = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    const socket = io("http://localhost:5000");
+
+    socket.on("roomId", (roomId) => {
+      console.log(`connected to room ${roomId}`);
+    });
+    socket.on("scheduledEventTriggered", (events) => {
+      console.log(events);
+      dispatch(setEvents(events))
+    });
+
+    // Clean up the socket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const getEvents = async () => {
+      fetch("/api/users/events")
+        .then((res) => res.json())
+        .then((res) => dispatch(setEvents(res.events)))
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+    getEvents();
+  }, []);
 
   return (
     <>
@@ -52,23 +85,24 @@ const Dashboard = () => {
           id="header"
           className="w-full h-16 border-b-[1px] border-gray-300 flex  z-10 sticky top-0 bg-white "
         >
-          <button
-          onClick={()=>{
-            navigate('/')
-          }}
+          <motion.button
+            onClick={() => {
+              navigate("/");
+            }}
             id="logo"
-            className="w-1/6 h-full  sm:flex hidden justify-center items-center flex-col"
+            className="w-1/6 h-full  flex  justify-center items-center flex-col"
           >
-            <div className="w-1/6 h-1/3 bg-gray-100  rounded-t-full"></div>
-            <div className="w-1/6 h-1/3  rounded-b-full bg-[#3b3299]"></div>
-          </button>
+            <div className="sm:w-1/6 sm:h-1/3 h-3 w-6 bg-gray-100  rounded-t-full"></div>
+            <div className="sm:w-1/6 sm:h-1/3 h-3 w-6  rounded-b-full bg-[#3b3299]"></div>
+          </motion.button>
           <div
             id="widgets"
-            className="sm:w-3/6 w-5/6 h-full  flex justify-between items-center sm:text-[13px] text-[8px]  text-gray-400 font-[500]"
+            className="sm:w-2/6 w-4/6 h-full  flex justify-between items-center sm:text-[13px] text-[8px] text-gray-400 font-[500]"
           >
-            <button
+            <motion.button
               onClick={() => {
-                showEvents(setShowWidget)
+                showEvents(setShowWidget);
+
               }}
               className={`flex justify-center items-center h-full w-1/5 ${
                 showWidget.isEvents ? "text-[#3b3299]" : ""
@@ -80,10 +114,10 @@ const Dashboard = () => {
                 }`}
               />{" "}
               Events
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => {
-               showCalendar(setShowWidget)
+                showCalendar(setShowWidget);
               }}
               className={`flex justify-center items-center h-full w-1/5 ${
                 showWidget.isCalendar ? "text-[#3b3299]" : ""
@@ -95,10 +129,10 @@ const Dashboard = () => {
                 }`}
               />{" "}
               Calendar
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => {
-               showProfile(setShowWidget)
+                showProfile(setShowWidget);
               }}
               className={`flex justify-center items-center h-full w-1/5 ${
                 showWidget.isProfile ? "text-[#3b3299]" : ""
@@ -110,10 +144,10 @@ const Dashboard = () => {
                 }`}
               />{" "}
               Profile
-            </button>
-            <button
+            </motion.button>
+            {/* <motion.button
               onClick={() => {
-               showPricing(setShowWidget)
+                showPricing(setShowWidget);
               }}
               className={`flex justify-center items-center h-full w-1/5 ${
                 showWidget.isPricing ? "text-[#3b3299]" : ""
@@ -125,10 +159,10 @@ const Dashboard = () => {
                 }`}
               />{" "}
               Pricing
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => {
-           showProfile(setShowWidget)
+                showProfile(setShowWidget);
               }}
               className={`flex justify-center items-center h-full w-1/5 ${
                 showWidget.isFeedback ? "text-[#3b3299]" : ""
@@ -140,32 +174,38 @@ const Dashboard = () => {
                 }`}
               />{" "}
               Feedback
-            </button>
+            </motion.button> */}
           </div>
           <div
             id="profile"
-            className="sm:w-2/6   h-full  text-gray-400 flex justify-end items-center sm:text-[13px] text-[8px] font-[500]"
+            className="sm:w-3/6 w-2/6  h-full  text-gray-400 flex sm:justify-end justify-center items-center sm:text-[13px] text-[8px] font-[500]"
           >
-            <p className="sm:text-[15px] sm:mr-20 sm:ml-0 ml-5 flex sm:w-1/6 border-[1px] items-center justify-around rounded-lg sm:py-2 sm:shadow-sm">
-              {isLoggedIn ? <><Avatar
-                githubHandle="sitebase"
-                size={window.innerWidth < 500 ? 15 : 30}
-                round="20px"
-              />
-              <button>
-                <AiOutlineLogout
-                  onClick={() => {
-                    logoutHandler();
-                  }}
-                  className="sm:text-[22px] text-[10px] text-black"
-                />
-              </button></>: <Link
-          className="sm:text-[14px] text-[8px] w-full h-full  text-black sm:rounded-2xl sm:px-0 px-2 sm:py-0 py-[4px] font-[600] border-black flex justify-center items-center "
-          to="/login"
-        >
-          Log in
-        </Link>}
-              
+            <p className="sm:text-[15px] sm:mr-20 sm:ml-0 ml-5 flex sm:w-1/6 
+            w-2/6 border-[1px] items-center sm:justify-around justify-between rounded-lg sm:py-2 sm:shadow-sm p-1 ">
+              {isLoggedIn ? (
+                <>
+                  <Avatar
+                    githubHandle="sitebase"
+                    size={window.innerWidth < 500 ? 15 : 30}
+                    round="20px"
+                  />
+                  <motion.button>
+                    <AiOutlineLogout
+                      onClick={() => {
+                        logoutHandler();
+                      }}
+                      className="sm:text-[22px] text-[10px] text-black"
+                    />
+                  </motion.button>
+                </>
+              ) : (
+                <Link
+                  className="sm:text-[14px] text-[8px] w-full h-full  text-black sm:rounded-2xl sm:px-0 px-2 sm:py-0 py-[4px] font-[600] border-black flex justify-center items-center "
+                  to="/login"
+                >
+                  Log in
+                </Link>
+              )}
             </p>
           </div>
         </div>

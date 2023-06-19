@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import { useState,useEffect } from "react";
+import {motion} from 'framer-motion'
 const Signup = () => {
 
   const [name, setName] = useState("");
@@ -133,18 +134,18 @@ const Signup = () => {
               {/* <span className="text-[#752ed9] ">Forgot passowrd</span> */}
             </div>
 
-            <button
+            <motion.button
             onClick={()=>{
               submitHandler()
             }}
             className="text-[10px] sm:text-[15px]  w-4/5 rounded-md py-1 bg-[#752ed9] text-white">
               Sign up
-            </button>
+            </motion.button>
 
             <div className="flex justify-center w-4/5 sm:text-[13px] text-[7px]">
               Already have an account?{" "}
               <Link to="/login">
-                <button className="ml-1 text-[#752ed9]">Login </button>
+                <motion.button className="ml-1 text-[#752ed9]">Login </motion.button>
               </Link>
             </div>
           </div>

@@ -1,22 +1,16 @@
 import schedule from "node-schedule";
 import sendAlerts from "./alert.js";
+import { io } from "../server.js";
 
+import {
+  convertTo24HourFormat,
+  handleCompletedEvent,
+} from "../helpers/index.js";
 import mongoose from "mongoose";
+import { roomId } from "../server.js";
 const { ObjectId } = mongoose.Types;
 
-const convertTo24HourFormat = (hour, period) => {
-  let hour24 = parseInt(hour, 10);
-
-  if (period.toLowerCase() === "pm" && hour24 !== 12) {
-    hour24 += 12;
-  } else if (period.toLowerCase() === "am" && hour24 === 12) {
-    hour24 = 0;
-  }
-
-  return hour24.toString().padStart(2, "0");
-};
-
-export const scheduleEvent = (event, phone) => {
+export const scheduleEvent = (event, user) => {
   const { name, description, day, month, year, hour, minutes, timeZone, _id } =
     event;
   const newMonth = parseInt(month);
@@ -24,9 +18,11 @@ export const scheduleEvent = (event, phone) => {
   const jobId = new ObjectId(_id);
   const date = new Date(year, newMonth, day, newHour, minutes, 0);
   const job = schedule.scheduleJob(`${jobId}`, date, () => {
-    sendAlerts(name, description, phone);
-    console.log(job);
-  })
+    sendAlerts(event,user);
+    handleCompletedEvent(user, event).then((updatedUser) => {
+      io.to(roomId).emit("scheduledEventTriggered", updatedUser.events);
+    });
+  });
 };
 
 export const cancelScheduledEvent = (_id) => {
