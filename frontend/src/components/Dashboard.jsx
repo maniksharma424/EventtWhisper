@@ -50,7 +50,7 @@ const Dashboard = () => {
       <div className={` w-full h-[820px] font-calendar ${opacity} ${blur} `}>
         <div
           id="header"
-          className="w-full h-16 border-b-[1px] border-gray-300 flex "
+          className="w-full h-16 border-b-[1px] border-gray-300 flex  z-10 sticky top-0 bg-white "
         >
           <button
           onClick={()=>{
@@ -155,7 +155,6 @@ const Dashboard = () => {
               <button>
                 <AiOutlineLogout
                   onClick={() => {
-                    console.log("hi");
                     logoutHandler();
                   }}
                   className="sm:text-[22px] text-[10px] text-black"

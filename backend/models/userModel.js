@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    events:{
+      type:Array,
+      required:false
+    },
   },
   {
     timestamps: true,
