@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { useAddEventMutation } from "../slices/eventApiSlice";
 import { addEvent } from "../slices/eventsSlice";
 import {motion} from 'framer-motion'
-import notify from "../../../backend/utils/notify.js";
 
 const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   const [eventName, setEventName] = useState("");
@@ -55,7 +54,7 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
       const res = await registerEvent({ event }).unwrap();
       dispatch(addEvent(event))
       
-      // location.reload()
+      location.reload()
 
     } catch (err) {
       toast.error(err?.data?.message || err.error);

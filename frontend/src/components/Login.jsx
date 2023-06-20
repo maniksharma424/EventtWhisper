@@ -37,7 +37,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="w-full sm:h-[830px] h-[360px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0]">
+      <div className="w-full sm:h-[830px] h-[360px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0] border-[1px] border-red-500">
         <div className=" sm:w-2/5 sm:h-4/5 w-full h-full sm:rounded-l-xl flex  justify-center items-center bg-white shadow-xl">
           <p className="sm:absolute sm:top-[110px] sm:text-[15px] text-[10px] sm:left-[170px] font-[500] absolute left-4 top-4">
             <span className="sm:text-[10px] text-[5px] relative bottom-0.5 sm:relative sm:bottom-0.5">

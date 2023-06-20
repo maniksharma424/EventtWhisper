@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 import mongoose from "mongoose";
 
 import { cancelScheduledEvent, scheduleEvent } from "../utils/nodeSchedule.js";
-import { updateUserInfo } from "../helpers/index.js";
+import { getActiveEvents, updateUserInfo } from "../helpers/index.js";
 import sendAlerts from "../utils/alert.js";
 import notify from "../utils/notify.js";
 const { ObjectId } = mongoose.Types;
@@ -13,16 +13,17 @@ const { ObjectId } = mongoose.Types;
 const registerEvent = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
-    if (user.events.length > 4) {
+    const activeEvents = getActiveEvents(user.events);
+    if (activeEvents > 4) {
       res.status(403);
       throw new Error("Upgrade plan to create more Events");
     } else {
       req.body.event._id = new ObjectId();
-
       await user.events.push(req.body.event);
       const updatedUser = await user.save();
       scheduleEvent(req.body.event, req.user);
       // notify(req.body.event,req.user.phone)
+      sendAlerts(req.body.event,req.user)
       res.json({
         _id: updatedUser._id,
         name: updatedUser.name,

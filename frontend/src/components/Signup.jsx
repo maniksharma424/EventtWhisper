@@ -30,10 +30,14 @@ const Signup = () => {
   const submitHandler = async () => {
 
     try {
-      const res = await register({name, phone, password }).unwrap();
-
-      dispatch(setCredentials({ ...res }));
-      navigate("/dashboard");
+      if(password != confrimPassword){
+        toast('Passwords do not match')
+      }
+      else{
+        const res = await register({name, phone, password }).unwrap();
+        dispatch(setCredentials({ ...res }));
+        navigate("/dashboard");
+      }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

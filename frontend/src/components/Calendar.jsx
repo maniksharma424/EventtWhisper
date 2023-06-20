@@ -8,6 +8,7 @@ import { weekdays, monthNames } from "../constants/constants";
 import { setEvents } from "../slices/eventsSlice";
 import {motion} from 'framer-motion'
 import Day from "./Day";
+import { activeEvents } from "../helpers";
 
 const Calendar = () => {
   const currentDate = new Date();
@@ -108,7 +109,7 @@ const Calendar = () => {
         >
           <motion.button className="flex justify-between items-center sm:w-1/5 w-2/5 border-[1px] sm:rounded-3xl rounded-xl px-2 h-full text-gray-700">
             <BiBell className="text-[#e3a34f] border-[1px] rounded-md border-[#3b3299]" />
-            {filteredEvents?.length}
+            {activeEvents(filteredEvents)}
           </motion.button>
         </div>
       </div>

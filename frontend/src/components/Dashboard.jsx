@@ -2,10 +2,8 @@ import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { BsCalendar2Week } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineLogout } from "react-icons/ai";
-import { ImPriceTags } from "react-icons/im";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { VscFeedback } from "react-icons/vsc";
 import Avatar from "react-avatar";
 import { useState } from "react";
 import Calendar from "./Calendar";
@@ -16,7 +14,7 @@ import Events from "./Events";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../slices/authSlice";
-import { showCalendar, showEvents, showPricing, showProfile } from "../helpers";
+import { showCalendar, showEvents, showProfile } from "../helpers";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { setEvents } from "../slices/eventsSlice";
@@ -185,7 +183,7 @@ const Dashboard = () => {
               {isLoggedIn ? (
                 <>
                   <Avatar
-                    githubHandle="sitebase"
+                    githubHandle="hKirat"
                     size={window.innerWidth < 500 ? 15 : 30}
                     round="20px"
                   />

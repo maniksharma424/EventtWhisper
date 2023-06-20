@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import { errorHandler, notFound } from "./middleware/errorMiddleWare.js";
 import connectDB from "./config/db.js";
 import eventRoutes from "./routes/eventRoutes.js";
-import eventBus from "./utils/eventBus.js";
 import { Server } from "socket.io";
 
 import path from "path";
