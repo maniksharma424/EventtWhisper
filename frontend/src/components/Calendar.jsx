@@ -76,6 +76,11 @@ const Calendar = () => {
     <motion.div
     initial={{ y: "50%", opacity: 0, scale: 2 }}
     animate={{ y: 0, opacity: 1, scale: 1 }}
+    exit={{
+      y:'50%',
+      opacity:0,
+      
+    }}
     className="w-full sm:h-[1100px]  font-calendar">
       <div className="w-full sm:h-36 flex justify-center items-center">
         <h1 className="sm:text-[40px] text-[25px] sm:mt-0 mt-5 font-[500]">

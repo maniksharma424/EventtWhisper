@@ -64,8 +64,10 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center">
     <motion.div 
+    key={'box'}
     initial={{ y: "50%", opacity: 0, scale: 2 }}
     animate={{ y: 0, opacity: 1, scale: 1 }}
+    exit={{ y: "50%", opacity: 0 }}
     className="sm:w-[550px] sm:h-[600px] h-[450px] border-[1px] sm:shadow-2xl sm:rounded-lg absolute sm:top-[150px] sm:left-[450px] top-[130px] left-[40px] bg-white flex flex-col p-7 justify-around items-center ">
       <h1 className="sm:text-[25px] text-[20px] sm:font-[600] w-full flex justify-between items-center">
         Create Event

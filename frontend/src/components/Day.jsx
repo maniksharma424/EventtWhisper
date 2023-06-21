@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { changeOpacity, setBlur } from "../slices/dashboardSlice";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import {  motion } from "framer-motion";
 const Day = ({ day, currentDate, currentMonth, currentYear, events }) => {
   const [scheduleEvent, setScheduleEvent] = useState(false);
 

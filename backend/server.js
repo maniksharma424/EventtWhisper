@@ -7,8 +7,7 @@ import connectDB from "./config/db.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import { Server } from "socket.io";
 
-import path from "path";
-import { log } from "console";
+import path from "path"
 dotenv.config();
 connectDB();
 const port = process.env.PORT || 5000;
