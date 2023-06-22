@@ -55,12 +55,9 @@ io.on("connection", (socket) => {
   // Join the room
   socket.join(roomId);
 
-  console.log(`A user connected to room ${roomId}`);
   socket.on("disconnect", () => {
-    console.log("client disconnected");
-  });
-  // Emit an event to the client
 
+  });
   // Emit an event to the client
   socket.emit("roomId", roomId);
 });

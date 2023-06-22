@@ -55,7 +55,6 @@ const notify = async (event,phoneNumber) => {
         },
       }
     );
-console.log(response);
 
   } catch (error) {
     console.error(error);

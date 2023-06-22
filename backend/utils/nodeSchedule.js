@@ -28,7 +28,5 @@ export const scheduleEvent = (event, user) => {
 export const cancelScheduledEvent = (_id) => {
   const jobId = new ObjectId(_id);
   const job = schedule.scheduledJobs[`${jobId}`];
-  console.log(job);
-  console.log(_id);
   job.cancel();
 };

@@ -53,7 +53,6 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
     try {
       const res = await registerEvent({ event }).unwrap();
       dispatch(addEvent(event))
-      
       location.reload()
 
     } catch (err) {

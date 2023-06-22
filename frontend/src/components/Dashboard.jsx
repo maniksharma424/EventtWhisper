@@ -44,7 +44,7 @@ const Dashboard = () => {
       dispatch(logout());
       navigate("/");
     } catch (error) {
-      console.log(error);
+throw new Error(error)
     }
   };
   useEffect(() => {
@@ -54,7 +54,6 @@ const Dashboard = () => {
       console.log(`connected to room ${roomId}`);
     });
     socket.on("scheduledEventTriggered", (events) => {
-      console.log(events);
       dispatch(setEvents(events))
     });
 
