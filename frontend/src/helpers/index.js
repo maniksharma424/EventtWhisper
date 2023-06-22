@@ -47,45 +47,31 @@ export const showProfile = (setShowWidget)=>{
 
 
 export const handleUpcommingEvents = (events,setFilteredEvents,date)=>{
-  const upcommingEvents = events.filter(event=>parseInt(event.day) >= date.getDate() && parseInt(event.month) >= date.getMonth() )
+  const upcommingEvents = events?.filter(event=>parseInt(event.day) >= date.getDate() && parseInt(event.month) >= date.getMonth() && event.active === true )
 
   setFilteredEvents(upcommingEvents)
 
 }
-export const handleCompletedEvents = (events,setFilteredEvents,date)=>{
-  const completedEvents = events.filter(event=>parseInt(event.day) < date.getDate() && parseInt(event.month) < date.getMonth() )
+export const handleCompletedEvents = (events,setFilteredEvents)=>{
+  const completedEvents = events?.filter(event=>event.active === false )
 
   setFilteredEvents(completedEvents)
 
 }
-export const handleSnoozedEvents = (events,setFilteredEvents)=>{
 
-  const cancelledEvents = events.filter(event=>event.active === false)
 
-  setFilteredEvents(cancelledEvents)
-
-}
 
 
 export const showUpcomming = (eventType,setEventType)=>{
   setEventType({
     upcomming:true,
     completed:false,
-    snoozed:false
     });
 }
 export const showCompleted = (eventType,setEventType)=>{
   setEventType({
     upcomming:false,
     completed:true,
-    snoozed:false
-    });
-}
-export const showCancelled = (eventType,setEventType)=>{
-  setEventType({
-    upcomming:false,
-    completed:false,
-    snoozed:true
     });
 }
 
@@ -106,4 +92,16 @@ export const  sortObjectsByMonthAndDate = (objectsArray)=> {
   });
 
   return objectsArray;
+}
+
+
+export const activeEvents = (array) =>{
+  const count = array.reduce((accumulator, obj) => {
+    if (obj.active) {
+      return accumulator + 1;
+    } else {
+      return accumulator;
+    }
+  }, 0);
+  return count
 }

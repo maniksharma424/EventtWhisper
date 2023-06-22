@@ -6,7 +6,10 @@ import { BsDot } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { weekdays, monthNames } from "../constants/constants";
 import { setEvents } from "../slices/eventsSlice";
+import {motion} from 'framer-motion'
 import Day from "./Day";
+import { activeEvents } from "../helpers";
+
 const Calendar = () => {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
@@ -24,17 +27,7 @@ const Calendar = () => {
     );
   });
 
-  useEffect(() => {
-    const getEvents = async () => {
-      fetch("/api/users/events")
-        .then((res) => res.json())
-        .then((res) => dispatch(setEvents(res.events)))
-        .catch((err) => {
-          throw new Error(err);
-        });
-    };
-    getEvents();
-  }, []);
+  
   
 
   const goToPreviousMonth = () => {
@@ -80,7 +73,15 @@ const Calendar = () => {
   });
 
   return (
-    <div className="w-full sm:h-[1100px]  font-calendar">
+    <motion.div
+    initial={{ y: "50%", opacity: 0, scale: 2 }}
+    animate={{ y: 0, opacity: 1, scale: 1 }}
+    exit={{
+      y:'50%',
+      opacity:0,
+      
+    }}
+    className="w-full sm:h-[1100px]  font-calendar">
       <div className="w-full sm:h-36 flex justify-center items-center">
         <h1 className="sm:text-[40px] text-[25px] sm:mt-0 mt-5 font-[500]">
           Calendar
@@ -94,27 +95,27 @@ const Calendar = () => {
           <h2 className="sm:w-1/3 w-1/2">
             {`${monthNames[currentMonth]}  ${currentYear}`}
           </h2>
-          <button
+          <motion.button
             className="px-1 sm:ml-5  text-gray-600 "
             onClick={goToPreviousMonth}
           >
             <BiChevronLeft />
-          </button>
-          <button>
+          </motion.button>
+          <motion.button>
             <BsDot />
-          </button>
-          <button className="px-1  text-gray-600 " onClick={goToNextMonth}>
+          </motion.button>
+          <motion.button className="px-1  text-gray-600 " onClick={goToNextMonth}>
             <BiChevronRight />
-          </button>
+          </motion.button>
         </div>
         <div
           id="total-notifications"
           className="sm:w-1/4 w-1/3 h-12 flex justify-center py-2 sm:text-[18px] text-[12px]  "
         >
-          <button className="flex justify-between items-center sm:w-1/5 w-2/5 border-[1px] sm:rounded-3xl rounded-xl px-2 h-full text-gray-700">
+          <motion.button className="flex justify-between items-center sm:w-1/5 w-2/5 border-[1px] sm:rounded-3xl rounded-xl px-2 h-full text-gray-700">
             <BiBell className="text-[#e3a34f] border-[1px] rounded-md border-[#3b3299]" />
-            {filteredEvents?.length}
-          </button>
+            {activeEvents(filteredEvents)}
+          </motion.button>
         </div>
       </div>
       <ul
@@ -140,7 +141,7 @@ const Calendar = () => {
           </li>
         ))}
       {monthDays?.map((day) => {
-        const dayEvents = filteredEvents.filter((event) => event.day === day.toString());
+        const dayEvents = filteredEvents?.filter((event) => event.day === day.toString());
 
         return (
           <Day
@@ -157,7 +158,7 @@ const Calendar = () => {
       <div className="w-full flex justify-center items-center mt-10 font-[800]">
         &copy; MYCAL 2023
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Calendar;

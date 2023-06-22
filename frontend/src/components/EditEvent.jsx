@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import {useDeleteEventMutation,useUpdateEventMutation,
 } from "../slices/eventApiSlice";
 import { deleteEvent, updateEvent } from "../slices/eventsSlice";
+import {motion} from 'framer-motion'
 
 const EditEvent = ({ event, hideEventEditor }) => {
   const {day,month,year,hour,minutes,timeZone, name,description, active,_id} = event;
@@ -55,26 +56,7 @@ const [deleteEventApi] = useDeleteEventMutation();
     }
   };
 
-  const SnoozeEvent = async () => {
-    const event = {
-      name: eventName.charAt(0).toUpperCase() + eventName.slice(1),
-      description: eventDescription,
-      day: `${day}`,
-      month: `${month}`,
-      year: `${year}`,
-      hour: eventTime.hour,
-      minutes: eventTime.minutes,
-      timeZone: eventTime.timeZone,
-      active: false,
-      _id: _id,
-    };
-    try {
-      const res = await updateEventApi(event).unwrap();
-      dispatch(updateEvent(event));
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
-    }
-  };
+
 
   return (
     <>
@@ -126,9 +108,9 @@ const [deleteEventApi] = useDeleteEventMutation();
               <p className="text-gray-600">Date</p>
               <span className="w-full flex justify-around sm:shadow-md items-center p-1 bg-gray-100 sm:rounded-lg">
                 {`${day} ${monthNames[month]} ,${year}`}{" "}
-                <button>
+                <motion.button>
                   <AiOutlineCalendar />
-                </button>
+                </motion.button>
               </span>
             </div>
             <div className="sm:w-2/5 w-2/5 h-full  ">
@@ -192,9 +174,9 @@ const [deleteEventApi] = useDeleteEventMutation();
                   <option value="PM">PM</option>
                 </select>
 
-                <button>
+                <motion.button>
                   <BiTime />
-                </button>
+                </motion.button>
               </span>
             </div>
           </div>
@@ -205,7 +187,7 @@ const [deleteEventApi] = useDeleteEventMutation();
         </div>
       </div>
       <div className="sm:w-2/5 w-full sm:h-[300px]  flex sm:flex-col justify-around items-center sm:text-[18px] text-[10px]">
-        <button
+        <motion.button
           className="shadow-xl border-[1px] sm:w-2/5 border-gray-500 sm:px-4 px-2 py-1 rounded-md sm:hover:hover:bg-[#2B2730]  sm:hover:text-white"
           onClick={() => {
             eventName === "" || eventDescription === ""
@@ -214,9 +196,9 @@ const [deleteEventApi] = useDeleteEventMutation();
           }}
         >
           Update
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
           className="shadow-xl border-[1px] sm:w-2/5 border-gray-500 sm:px-4 px-2 py-1 rounded-md sm:hover:hover:bg-[#2B2730]  sm:hover:text-white"
           onClick={() => {
             eventName === "" || eventDescription === ""
@@ -225,19 +207,9 @@ const [deleteEventApi] = useDeleteEventMutation();
           }}
         >
           Delete Event
-        </button>
-        <button
-          className="shadow-xl border-[1px] sm:w-2/5 border-gray-500 sm:px-4 px-2 py-1 rounded-md sm:hover:hover:bg-[#2B2730]  sm:hover:text-white"
-          onClick={() => {
-            eventName === "" || eventDescription === ""
-              ? toast.error("Enter event name and description to create alert")
-              : hideEventEditor() & SnoozeEvent();
-          }}
-        >
-          Snooze
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
           className="shadow-xl border-[1px] sm:w-2/5 border-gray-500 sm:px-4 px-2 py-1 rounded-md sm:hover:hover:bg-[#2B2730]  sm:hover:text-white"
           onClick={() => {
             eventName === "" || eventDescription === ""
@@ -246,7 +218,7 @@ const [deleteEventApi] = useDeleteEventMutation();
           }}
         >
           Cancel
-        </button>
+        </motion.button>
       </div>
     </>
   );

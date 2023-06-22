@@ -4,8 +4,11 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { MICROSOFT_IMG, PAYPAL_IMG, ZOOM_IMG } from "../constants/constants";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
-
+import {motion} from 'framer-motion'
+import { useSelector } from "react-redux";
 const Home = () => {
+  const {userInfo} = useSelector(state=>state.auth)
+
   return (
     <div id="body" className="sm:p-12 p-8 h-[800px] w-full">
       <div id="upper" className="h-1/2 w-full  flex flex-wrap">
@@ -71,7 +74,7 @@ const Home = () => {
             className="w-1/2 h-1/3 flex justify-between items-center"
           >
             <Link to='/dashboard' className="text-white sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-black border-[1px] flex justify-center items-center">
-              Try for free
+            {userInfo?.name ? <span>Calendar</span>:<span>Try for free</span>}  
             </Link>
             <Link className=" sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-[#c599f2] border-[1px] text-black flex justify-center items-center">
               Learn more
@@ -132,30 +135,30 @@ const Home = () => {
             id="feature-btns"
             className="w-full h-1/3 flex  sm:justify-between justify-evenly items-center"
           >
-            <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
+            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" />{" "}
               Experience the app
-            </button>
-            <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
+            </motion.button>
+            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Unlock
               event management
-            </button>
-            <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
+            </motion.button>
+            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Schedule
               with ease
-            </button>
+            </motion.button>
           </div>
         </div>
 
         <div className=" sm:w-1/2 w-full  sm:h-full h-1/2 ">
           <div className="w-full h-2/3 border-[1px] border-black rounded-r-[45px] flex ">
             <div className="w-1/3 h-full  bg-black sm:p-4 p-2 flex flex-col items-start justify-evenly font-[200] sm:text-[14px] text-[7px]">
-              <button className="bg-[#27c22c] sm:px-3 px-1 py-1 rounded-xl">
+              <motion.button className="bg-[#27c22c] sm:px-3 px-1 py-1 rounded-xl">
                 Reminders
-              </button>
+              </motion.button>
               <p className="text-white">
                 {" "}
                 <input
@@ -183,12 +186,12 @@ const Home = () => {
             </div>
             <div className="w-2/3 h-full  relative right-10 sm:right-16 bg-white  sm:rounded-l-[50px] rounded-l-[30px] sm:p-4 p-2 flex flex-col items-start justify-evenly font-[300] sm:text-[14px] text-[7px]">
               <div className="w-full flex justify-between">
-                <button className="px-3 bg-[#c599f2] rounded-2xl py-1">
+                <motion.button className="px-3 bg-[#c599f2] rounded-2xl py-1">
                   Assigned
-                </button>
-                <button className="px-3 bg-gray-200 text-gray-600 rounded-2xl py-1">
+                </motion.button>
+                <motion.button className="px-3 bg-gray-200 text-gray-600 rounded-2xl py-1">
                   3 Tasks
-                </button>
+                </motion.button>
               </div>
               <p className="w-full flex justify-between">
                 <span>
@@ -255,21 +258,21 @@ const Home = () => {
             id="feature-btns"
             className="w-full h-1/3 flex justify-evenly items-center"
           >
-            <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] bg-[#c599f2]">
+            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] bg-[#c599f2]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Try it
               now
-            </button>
-            <button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]  bg-[#4551d1] text-white">
+            </motion.button>
+            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]  bg-[#4551d1] text-white">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Stay
               organized
-            </button>
-            <button className="border-[1px]   border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] flex  items-center bg-[#27c22c]">
+            </motion.button>
+            <motion.button className="border-[1px]   border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] flex  items-center bg-[#27c22c]">
               {" "}
               <IoIosAddCircleOutline className="text-white bg-black mx-2 rounded-full" />{" "}
               Experience seamless planning
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

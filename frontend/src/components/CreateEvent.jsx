@@ -3,21 +3,35 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { defaultOpacity, removeBlur } from "../slices/dashboardSlice";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { toast } from "react-toastify";
 import { useAddEventMutation } from "../slices/eventApiSlice";
 import { addEvent } from "../slices/eventsSlice";
-
+import {motion} from 'framer-motion'
 
 const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
 
   const [eventTime, setEventTime] = useState({
-    hour: "03",
-    minutes: "34",
-    timeZone: "PM",
+    hour: '',
+    minutes: '',
+    timeZone: '',
   });
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    const currentHour12 = currentHour % 12 || 12; // 
+    const currentMinutes = String(currentDate.getMinutes()).padStart(2, '0');
+    const currentTimeZone = currentDate.getHours() >= 12 ? 'PM' : 'AM';
+
+    setEventTime({
+      hour: currentHour,
+      minutes: currentMinutes,
+      timeZone: currentTimeZone,
+    });
+  }, []);
 
 
   const [registerEvent, { isLoading }] = useAddEventMutation();
@@ -35,10 +49,11 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
       timeZone: eventTime.timeZone,
       active:true
     };
+
     try {
       const res = await registerEvent({ event }).unwrap();
       dispatch(addEvent(event))
-      // location.reload()
+      location.reload()
 
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -46,10 +61,16 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
   };
 
   return (
-    <div className="sm:w-[550px] sm:h-[600px] h-[450px] border-[1px] sm:shadow-2xl sm:rounded-lg absolute sm:top-[150px] sm:left-[450px] top-[130px] left-[40px] bg-white flex flex-col p-7 justify-around items-center ">
+    <div className="fixed inset-0 flex items-center justify-center">
+    <motion.div 
+    key={'box'}
+    initial={{ y: "50%", opacity: 0, scale: 2 }}
+    animate={{ y: 0, opacity: 1, scale: 1 }}
+    exit={{ y: "50%", opacity: 0 }}
+    className="sm:w-[550px] sm:h-[600px] h-[450px] border-[1px] sm:shadow-2xl sm:rounded-lg absolute sm:top-[150px] sm:left-[450px] top-[130px] left-[40px] bg-white flex flex-col p-7 justify-around items-center ">
       <h1 className="sm:text-[25px] text-[20px] sm:font-[600] w-full flex justify-between items-center">
         Create Event
-        <button
+        <motion.button
           className="font-[300] px-2 border-[1px] text-[15px] rounded-md shadow-sm"
           onClick={() => {
             dispatch(removeBlur());
@@ -58,7 +79,7 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
           }}
         >
           x
-        </button>
+        </motion.button>
       </h1>
       <div className="h-1/6 w-full sm:text-[15px] text-[12px]  flex flex-col justify-around">
         <p className="text-gray-600">Event Name </p>
@@ -93,9 +114,9 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
             <p className="text-gray-600">Date</p>
             <span className="w-full flex justify-around sm:shadow-md items-center p-1 bg-gray-100 sm:rounded-lg">
               {`${day} ${monthNames[month]} ,${year}`}{" "}
-              <button>
+              <motion.button>
                 <AiOutlineCalendar />
-              </button>
+              </motion.button>
             </span>
           </div>
           <div className="sm:w-2/5 w-4/5 h-full  ">
@@ -159,9 +180,9 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
                 <option value="PM">PM</option>
               </select>
 
-              <button>
+              <motion.button>
                 <BiTime />
-              </button>
+              </motion.button>
             </span>
           </div>
         </div>
@@ -171,7 +192,7 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
         </p>
       </div>
       <div className="create-cancel-btns  w-full h-fit">
-        <button
+        <motion.button
           className="border-[1px] w-full border-gray-500 px-4 py-1 rounded-2xl"
           onClick={() => {
             eventName === "" || eventDescription === ""
@@ -179,12 +200,13 @@ const CreateEvent = ({ day, month, year, hideEventSchdeuler }) => {
               : handleSubmitEventInfo() &
                 dispatch(removeBlur()) &
                 dispatch(defaultOpacity()) &
-                hideEventSchdeuler();
+                hideEventSchdeuler() 
           }}
         >
           Create
-        </button>
+        </motion.button>
       </div>
+    </motion.div>
     </div>
   );
 };
