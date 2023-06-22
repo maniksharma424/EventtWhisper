@@ -96,7 +96,7 @@ export const  sortObjectsByMonthAndDate = (objectsArray)=> {
 
 
 export const activeEvents = (array) =>{
-  const count = array.reduce((accumulator, obj) => {
+  const count = array?.reduce((accumulator, obj) => {
     if (obj.active) {
       return accumulator + 1;
     } else {

@@ -4,9 +4,9 @@ import { protect } from '../middleware/authMiddleWare.js'
 
 const router = express.Router()
 
-router.route('/events').get(protect,getEventDetails).put(protect,registerEvent)
-router.route('/events').delete(protect,deleteEvent)
-router.route('/events/update').put(protect,updateEvent)
+router.route('/events').get(getEventDetails).put(registerEvent)
+router.route('/events').delete(deleteEvent)
+router.route('/events/update').put(updateEvent)
 
 
 export default router
