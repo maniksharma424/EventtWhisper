@@ -78,7 +78,7 @@ export const handleCompletedEvent = (USER, event) => {
 };
 
 export const getActiveEvents = (array) =>{
-  const count = array.reduce((accumulator, obj) => {
+  const count = array?.reduce((accumulator, obj) => {
     if (obj.active) {
       return accumulator + 1;
     } else {
