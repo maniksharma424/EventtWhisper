@@ -6,7 +6,6 @@ import { cancelScheduledEvent, scheduleEvent } from "../utils/nodeSchedule.js";
 import { getActiveEvents, updateUserInfo } from "../helpers/index.js";
 import sendAlerts from "../utils/alert.js";
 import notify from "../utils/notify.js";
-import { logOutUser } from "./userControllers.js";
 const { ObjectId } = mongoose.Types;
 //@desc RegisterEvent
 //Route PUT /api/users/event
