@@ -6,6 +6,7 @@ import { cancelScheduledEvent, scheduleEvent } from "../utils/nodeSchedule.js";
 import { getActiveEvents, updateUserInfo } from "../helpers/index.js";
 import sendAlerts from "../utils/alert.js";
 import notify from "../utils/notify.js";
+import { logOutUser } from "./userControllers.js";
 const { ObjectId } = mongoose.Types;
 //@desc RegisterEvent
 //Route PUT /api/users/event
@@ -22,7 +23,7 @@ const registerEvent = asyncHandler(async (req, res) => {
       await user.events.push(req.body.event);
       const updatedUser = await user.save();
       scheduleEvent(req.body.event, req.user);
-      // notify(req.body.event,req.user.phone)
+      // notify(req.body.event,req.userphone)
       sendAlerts(req.body.event,req.user)
       res.json({
         _id: updatedUser._id,
@@ -41,6 +42,7 @@ const registerEvent = asyncHandler(async (req, res) => {
 //Route GET /api/user/event
 // PRIVATE
 const getEventDetails = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -60,7 +62,7 @@ const getEventDetails = asyncHandler(async (req, res) => {
 //Route DELETE /api/user/event
 // PRIVATE
 const deleteEvent = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user_id);
   if (user) {
     const eventId = new ObjectId(req.body._id);
 
@@ -95,14 +97,14 @@ const deleteEvent = asyncHandler(async (req, res) => {
 // PRIVATE
 const updateEvent = asyncHandler(async (req, res) => {
   cancelScheduledEvent(req.body._id);
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user_id);
   if (user) {
     const updated = await updateUserInfo(user, req.body);
 
     user.markModified("events");
     const updatedUser = await user.save();
 
-    scheduleEvent(req.body, req.user.phone);
+    scheduleEvent(req.body, req.userphone);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
