@@ -23,7 +23,7 @@ const registerEvent = asyncHandler(async (req, res) => {
       await user.events.push(req.body.event);
       const updatedUser = await user.save();
       scheduleEvent(req.body.event, req.user);
-      // notify(req.body.event,req.userphone)
+      // notify(req.body.event,req.user.phone)
       sendAlerts(req.body.event,req.user)
       res.json({
         _id: updatedUser._id,
@@ -62,7 +62,7 @@ const getEventDetails = asyncHandler(async (req, res) => {
 //Route DELETE /api/user/event
 // PRIVATE
 const deleteEvent = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user_id);
+  const user = await User.findById(req.user._id);
   if (user) {
     const eventId = new ObjectId(req.body._id);
 
@@ -97,14 +97,14 @@ const deleteEvent = asyncHandler(async (req, res) => {
 // PRIVATE
 const updateEvent = asyncHandler(async (req, res) => {
   cancelScheduledEvent(req.body._id);
-  const user = await User.findById(req.user_id);
+  const user = await User.findById(req.user._id);
   if (user) {
     const updated = await updateUserInfo(user, req.body);
 
     user.markModified("events");
     const updatedUser = await user.save();
 
-    scheduleEvent(req.body, req.userphone);
+    scheduleEvent(req.body, req.user.phone);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,

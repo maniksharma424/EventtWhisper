@@ -66,7 +66,7 @@ const logOutUser = asyncHandler(async (req, res) => {
 //Route GET /api/user/profile
 // PRIVATE
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user_id);
+  const user = await User.findById(req.user._id);
 
   if (user) {
     res.json({
@@ -84,7 +84,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //Route PUT /api/user/profile
 // PRIVATE
 const updateUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user_id);
+  const user = await User.findById(req.user._id);
   if (user) {
     user.name = req.body.name || user.name;
     user.phone = req.body.phone || user.phone;
@@ -108,7 +108,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //Route DELETE /api/user/profile
 // PRIVATE
 const deleteUser = asyncHandler(async (req, res) => {
-  const userId = req.user_id;
+  const userId = req.user._id;
 
   // Find the user by _id and remove it
   const deletedUser = await User.findByIdAndRemove(userId);
