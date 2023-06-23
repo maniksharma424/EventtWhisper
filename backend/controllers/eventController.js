@@ -41,6 +41,7 @@ const registerEvent = asyncHandler(async (req, res) => {
 //Route GET /api/user/event
 // PRIVATE
 const getEventDetails = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
   const user = await User.findById(req.user._id);
 
   if (user) {
