@@ -53,9 +53,10 @@ export const io = new Server(server, {
     origin: "http://localhost:3000",
   },
 });
+export let roomId
 
 io.on("connection", (socket) => {
-  let roomId = socket.id; // Use socket ID as the room ID
+   roomId = socket.id; // Use socket ID as the room ID
   // Join the room
   socket.join(roomId);
 
