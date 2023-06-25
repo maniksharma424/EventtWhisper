@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div id="body" className="sm:p-12 p-8 h-[800px] w-full">
       <div id="upper" className="h-1/2 w-full  flex flex-wrap">
-        <div className="w-1/2 h-full text-[30px] sm:text-[70px] font-[700]">
+        <div className="w-1/2 h-full text-[30px] sm:text-[70px] sm:font-[700]">
           <p>Keep your reminders</p>
           <p>organised in just</p>
           <p>one application</p>
@@ -30,7 +30,7 @@ const Home = () => {
               <p className=" sm:text-[13px] text-[9px] ">
                 Architecture Analysis
               </p>
-              <div className="w-2/3 sm:h-1/2 h-1/4 sm:rounded-2xl rounded-md  border-[1px] border-black flex justify-around items-center sm:text-[40px] text-[25px] bg-black text-white">
+              <div className="w-2/3 sm:px-0 px-[2px] sm:h-1/2 h-1/4 sm:rounded-2xl rounded-md  border-[1px] border-black flex justify-around items-center sm:text-[40px] text-[25px] bg-black text-white">
                 <LuPauseCircle />
                 <FaStopCircle />
               </div>

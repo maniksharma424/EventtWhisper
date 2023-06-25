@@ -10,7 +10,7 @@ import { Server } from "socket.io";
 import path from "path"
 dotenv.config();
 connectDB();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 
 const app = express();
 
