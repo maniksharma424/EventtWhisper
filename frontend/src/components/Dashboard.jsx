@@ -48,7 +48,7 @@ throw new Error(error)
     }
   };
   useEffect(() => {
-    const socket = io("http://www.eventwhisper.click");
+    const socket = io("https://www.eventwhisper.click");
 
     socket.on("roomId", (roomId) => {
       console.log(`connected to room ${roomId}`);
