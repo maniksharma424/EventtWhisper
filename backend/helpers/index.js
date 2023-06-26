@@ -34,24 +34,32 @@ export const updateUserInfo = async (user, event) => {
     user.events[index].description);
   user.events[index].active = await active;
 };
-export const convertTo24HourFormat = (hour, period) => {
-  let hour24 = parseInt(hour, 10);
+export const  convertToValidDate =  (day, month, year, hour, minutes, timeZone) => {
+  const parsedDay = parseInt(day);
+  const parsedMonth = parseInt(month);
+  const parsedYear = parseInt(year);
+  let parsedHour = parseInt(hour);
+  const parsedMinutes = parseInt(minutes);
 
-  if (period.toLowerCase() === "pm" && hour24 !== 12) {
-    hour24 += 12;
-  } else if (period.toLowerCase() === "am" && hour24 === 12) {
-    hour24 = 0;
+  if(timeZone === 'PM'){
+    parsedHour = parsedHour + 12
   }
-
-  return hour24.toString().padStart(2, "0");
+  return new Date(parsedYear,parsedMonth,parsedDay,parsedHour,parsedMinutes,0)
 };
 
 
 
+
+
+
+
+
 export const handleCompletedEvent = (USER, event) => {
+
   return new Promise(async (resolve, reject) => {
     try {
       const user = await User.findById(USER._id);
+
       if (user) {
         const eventId = new ObjectId(event._id);
 

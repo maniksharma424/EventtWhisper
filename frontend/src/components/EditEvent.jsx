@@ -126,7 +126,7 @@ const [deleteEventApi] = useDeleteEventMutation();
                     });
                   }}
                   className="form-select w-1/4 sm:rounded-md  "
-                  defaultValue="1"
+
                 >
                   {Array.from({ length: 12 }, (_, index) => {
                     const hour = (index + 1).toString().padStart(2, "0");
@@ -148,7 +148,7 @@ const [deleteEventApi] = useDeleteEventMutation();
                     });
                   }}
                   className="form-select w-1/4 sm:rounded-md  "
-                  defaultValue="00"
+
                 >
                   {Array.from({ length: 60 }, (_, index) => {
                     const minute = index.toString().padStart(2, "0");

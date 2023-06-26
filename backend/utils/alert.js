@@ -44,7 +44,7 @@ const sendAlerts = async (event, user) => {
         },
       }
     );
-console.log(response);
+
 
   } catch (error) {
 throw new Error(error)

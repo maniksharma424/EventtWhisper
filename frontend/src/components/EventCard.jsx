@@ -28,10 +28,10 @@ const EventCard = ({ event, index }) => {
 
   return (
     <div className="sm:w-5/6 sm:h-[90px] border-[1px] mt-5 sm:px-3 py-1 rounded-md shadow-md ">
-      <div id="event-details" className="w-full h-full flex text-[#4D4D4D] ">
+      <div id="event-details" className="w-full h-full flex text-[#4D4D4D]">
         <div
           id="info"
-          className="sm:w-1/2 w-3/4 h-full flex justify-start items-center py-1"
+          className=" w-3/4 h-full flex justify-start items-center py-1 "
         >
           {active ? (
             <p className="bg-green-700 sm:p-1 p-[2px] rounded-lg sm:ml-0 ml-2"></p>
@@ -71,19 +71,19 @@ const EventCard = ({ event, index }) => {
           <div
             id="
         name-description"
-            className=" flex h-full  flex-col w-2/4 justify-between items-start   "
+            className=" flex h-full  flex-col w-1/2 justify-between items-center px-4  "
           >
             <p className="sm:text-[17px] text-[8px] h-1/2 w-full text-ellipsis overflow-hidden whitespace-nowrap sm:mb-0 mb-2">
               {name}
             </p>
-            <p className="text-gray-500 sm:text-[12px] h-1/2 w-full text-[9px]  sm:mt-3  text-ellipsis overflow-hidden whitespace-nowrap flex justify-start items-center">
+            <p className="text-gray-500  sm:text-[12px] h-1/2 w-full text-[9px]  sm:mt-3  text-ellipsis overflow-hidden whitespace-nowrap flex justify-start items-center">
               {description}
             </p>
           </div>
         </div>
         <div
           id="edit"
-          className="w-1/2  flex justify-end items-center sm:p-0 p-2"
+          className="w-1/4  flex justify-end items-center sm:p-0 p-2 "
         >
           {active ? (
             <motion.button
@@ -100,7 +100,14 @@ const EventCard = ({ event, index }) => {
               )}
             </motion.button>
           ) : (
-          null
+            <motion.button
+            onClick={() => {
+              
+            }}
+            className="border-[1px] sm:text-[14px] text-[12px] sm:px-5 px-2 sm:rounded-md rounded-md bg-gray-100 sm:py-2 py-1 flex justify-evenly items-center hover:text-white hover:bg-[#2B2730] sm:font-[600]"
+          >
+            Remove
+          </motion.button>
           )}
         </div>
       </div>

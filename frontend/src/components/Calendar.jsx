@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BiChevronLeft } from "react-icons/bi";
 import { BiBell } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { weekdays, monthNames } from "../constants/constants";
-import { setEvents } from "../slices/eventsSlice";
 import {motion} from 'framer-motion'
 import Day from "./Day";
 import { activeEvents } from "../helpers";
@@ -16,8 +15,6 @@ const Calendar = () => {
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
 
   const {events}  = useSelector((state) => state.eventSlice);
-
-  const dispatch = useDispatch();
 
   const filteredEvents = events?.filter((event) => {
     const eventDate = new Date(event.year, event.month, event.day);
@@ -120,7 +117,7 @@ const Calendar = () => {
       </div>
       <ul
         id="calendar-days"
-        className="flex  justify-between mt-4 sm:px-28  w-full"
+        className="flex  justify-between mt-4 sm:px-28  w-full "
       >
         {weekdays?.map((day) => (
           <li key={day} className="w-1/6 text-center ">
@@ -135,7 +132,7 @@ const Calendar = () => {
         {previousDays?.map((day) => (
           <li
             key={`previous_${day}`}
-            className="sm:w-[173px] w-[59px] sm:h-36 h-16 flex justify-center text-center border-[1px] border-gray-200 text-gray-300"
+            className="w-[calc(100%/7)] sm:h-36 h-16 flex justify-center text-center border-[1px] border-gray-200 text-gray-300"
           >
             <span className="mt-2">{day}</span>
           </li>

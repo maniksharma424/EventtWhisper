@@ -36,7 +36,7 @@ const Day = ({ day, currentDate, currentMonth, currentYear, events }) => {
             : toast.error("Cannot set events for the selected date");
         }}
         key={day}
-        className={`sm:w-[173px] w-[59px] sm:h-36 h-16 text-center flex border-[1px] justify-start items-center flex-col ${
+        className={`w-[calc(100%/7)] sm:w-[calc(100%/7)] sm:h-36 h-16 text-center flex border-[1px] justify-start items-center flex-col ${
           day === currentDate.getDate() &&
           currentMonth === currentDate.getMonth() &&
           currentYear === currentDate.getFullYear()

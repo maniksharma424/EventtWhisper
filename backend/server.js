@@ -47,6 +47,9 @@ export let roomId
 export const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
   },
 });
 
@@ -54,7 +57,7 @@ io.on("connection", (socket) => {
    roomId = socket.id; // Use socket ID as the room ID
   // Join the room
   socket.join(roomId);
-
+console.log(`new user connected to room ${roomId}`);
   socket.on("disconnect", () => {
 
   });

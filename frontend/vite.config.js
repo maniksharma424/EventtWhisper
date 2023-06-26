@@ -9,7 +9,7 @@ export default defineConfig({
     port: 3000,
     proxy:{
       '/api':{
-        target: "http://www.eventwhisper.click",
+        target: "https://www.eventwhisper.click",
         changeOrigin: true
       }
     }

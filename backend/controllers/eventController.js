@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 
 import { cancelScheduledEvent, scheduleEvent } from "../utils/nodeSchedule.js";
 import { getActiveEvents, updateUserInfo } from "../helpers/index.js";
-import sendAlerts from "../utils/alert.js";
 import notify from "../utils/notify.js";
 const { ObjectId } = mongoose.Types;
 //@desc RegisterEvent
@@ -23,7 +22,6 @@ const registerEvent = asyncHandler(async (req, res) => {
       const updatedUser = await user.save();
       scheduleEvent(req.body.event, req.user);
       // notify(req.body.event,req.user.phone)
-      sendAlerts(req.body.event,req.user)
       res.json({
         _id: updatedUser._id,
         name: updatedUser.name,
@@ -41,7 +39,7 @@ const registerEvent = asyncHandler(async (req, res) => {
 //Route GET /api/user/event
 // PRIVATE
 const getEventDetails = asyncHandler(async (req, res) => {
-  console.log(req.user._id);
+
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -103,7 +101,7 @@ const updateEvent = asyncHandler(async (req, res) => {
     user.markModified("events");
     const updatedUser = await user.save();
 
-    scheduleEvent(req.body, req.user.phone);
+    scheduleEvent(req.body, req.user);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
