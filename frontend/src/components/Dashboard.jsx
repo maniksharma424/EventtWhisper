@@ -142,36 +142,6 @@ throw new Error(error)
               />{" "}
               Profile
             </motion.button>
-            {/* <motion.button
-              onClick={() => {
-                showPricing(setShowWidget);
-              }}
-              className={`flex justify-center items-center h-full w-1/5 ${
-                showWidget.isPricing ? "text-[#3b3299]" : ""
-              }`}
-            >
-              <ImPriceTags
-                className={`sm:mr-2 mr-1 sm:text-[15px] ${
-                  showWidget.isPricing ? "text-[#e3a34f]" : null
-                }`}
-              />{" "}
-              Pricing
-            </motion.button>
-            <motion.button
-              onClick={() => {
-                showProfile(setShowWidget);
-              }}
-              className={`flex justify-center items-center h-full w-1/5 ${
-                showWidget.isFeedback ? "text-[#3b3299]" : ""
-              }`}
-            >
-              <VscFeedback
-                className={`sm:mr-2 mr-1 sm:text-[15px] ${
-                  showWidget.isFeedback ? "text-[#e3a34f]" : null
-                }`}
-              />{" "}
-              Feedback
-            </motion.button> */}
           </div>
           <div
             id="profile"

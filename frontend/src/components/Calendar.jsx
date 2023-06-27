@@ -153,7 +153,7 @@ const Calendar = () => {
       })}
       </ul>
       <div className="w-full flex justify-center items-center mt-10 font-[800]">
-        &copy; MYCAL 2023
+        &copy; Event Whisper 2023
       </div>
     </motion.div>
   );

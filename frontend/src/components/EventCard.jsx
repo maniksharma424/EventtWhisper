@@ -19,7 +19,7 @@ const EventCard = ({ event, index }) => {
     active,
   } = event;
 
-  const date = new Date(year, month - 1, day);
+  const date = new Date(year, month , day);
   const options = { weekday: "long" };
   const dayName = date.toLocaleString("en-US", options);
 
@@ -99,16 +99,9 @@ const EventCard = ({ event, index }) => {
                 <FiChevronDown className="sm:ml-3" />
               )}
             </motion.button>
-          ) : (
-            <motion.button
-            onClick={() => {
-              
-            }}
-            className="border-[1px] sm:text-[14px] text-[12px] sm:px-5 px-2 sm:rounded-md rounded-md bg-gray-100 sm:py-2 py-1 flex justify-evenly items-center hover:text-white hover:bg-[#2B2730] sm:font-[600]"
-          >
-            Remove
-          </motion.button>
-          )}
+          ) : null
+          
+          }
         </div>
       </div>
       {edit ? (

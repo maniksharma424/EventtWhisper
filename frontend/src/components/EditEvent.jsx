@@ -113,7 +113,7 @@ const [deleteEventApi] = useDeleteEventMutation();
                 </motion.button>
               </span>
             </div>
-            <div className="sm:w-2/5 w-2/5 h-full  ">
+            <div className="sm:w-2/5 w-1/2 h-full  ">
               <p className="text-gray-600">Time</p>
               <span className="w-full flex justify-around sm:shadow-md items-center p-1 bg-gray-100 sm:rounded-lg">
                 <select
