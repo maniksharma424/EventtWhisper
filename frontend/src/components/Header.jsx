@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const {userInfo} = useSelector(state=>state.auth)
   return (
-    <div className="sm:px-14 sm:py-3 px-8 py-2 w-full border-b-[1px]  border-black flex justify-between">
+    <div className="sm:px-14 sm:py-3 px-8 py-2 w-full border-b-[0.1px] sm:border-b-[1px]  border-black flex justify-between">
       <div className="sm:w-3/5 w-1/2 flex">
         <div id="logo" className="flex   justify-between items-center  ">
           <img
-            className="sm:w-10 w-5 sm:h-10 h-5 rotate-90"
-            src="https://www.svgrepo.com/show/327408/logo-vercel.svg"
+            className="sm:w-10 w-5 sm:h-10 h-5 "
+            src="https://cdn-webcache.wimages.net/img/android_app_icon-30dffff8f6e54d2c8a9c76e301ad79e0.png?vsn=d"
             alt="logo"
           />
         </div>

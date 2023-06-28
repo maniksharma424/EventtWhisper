@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const notify = async (event,phoneNumber) => {
+const welcome = async (name,phone) => {
   try {
     const response = await axios.post(
       "https://graph.facebook.com/v16.0/104731305941884/messages",
       {
         messaging_product: "whatsapp",
-        to: `91${phoneNumber}`,
+        to: `91${phone}`,
         type: "template",
         template: {
-          name: "notify",
+          name: "welcome",
           language: {
             code: "en_US",
           },
@@ -20,7 +20,7 @@ const notify = async (event,phoneNumber) => {
                 {
                   type: "image",
                   image: {
-                    link: "https://www.pngitem.com/pimgs/m/75-757489_post-notification-bell-png-transparent-background-notification-icon.png",
+                    link: "https://cdn-webcache.wimages.net/img/android_app_icon-30dffff8f6e54d2c8a9c76e301ad79e0.png?vsn=d",
                   },
                 },
               ],
@@ -30,7 +30,7 @@ const notify = async (event,phoneNumber) => {
               parameters: [
                 {
                   type: "text",
-                  text: `${event.day}/${event.month}/${event.year} at ${event.hour}:${event.minutes} ${event.timeZone} you will be notified accordingly`,
+                  text: `${name}`,
                 },
               ],
             },
@@ -41,7 +41,7 @@ const notify = async (event,phoneNumber) => {
               parameters: [
                 {
                   type: "text",
-                  text: "http://stashit.netlify.app/",
+                  text: "https://www.eventwhisper.click",
                 },
               ],
             },
@@ -57,7 +57,7 @@ const notify = async (event,phoneNumber) => {
     );
 
   } catch (error) {
-    console.error(error);
+ throw new Error(error)
   }
 };
-export default notify;
+export default welcome;

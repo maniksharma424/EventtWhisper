@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import welcome from "../utils/welcome.js";
 
 //@desc AuthUser
 //Route POST /api/user/auth
@@ -40,6 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
   if (user) {
     generateToken(res, user._id);
+    welcome(name, phone);
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -87,7 +89,17 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
     user.name = req.body.name || user.name;
-    user.phone = req.body.phone || user.phone;
+
+    if (req.body.phone) {
+      const phone = req.body.phone;
+      const userExists = await User.findOne({ phone });
+      if (userExists) {
+        res.status(401)
+        throw new Error("User with this phone number already exists");
+      } else {
+        user.phone = req.body.phone || user.phone;
+      }
+    }
 
     if (req.body.password) {
       user.password = req.body.password;

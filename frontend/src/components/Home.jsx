@@ -16,9 +16,9 @@ const Home = () => {
           <p>Keep your reminders</p>
           <p>organised in just</p>
           <p>one application</p>
-          <p className="sm:text-[15px] text-[10px] text-gray-400 font-[200]">
-            Create events and receive WhatsApp notifications. Simplify event
-            management with our intuitive web app.
+          <p className="sm:text-[15px] text-[10px] font-[200]">
+            
+Ensure that you never miss any reminders by receiving them directly on WhatsApp.
           </p>
         </div>
         <div className="w-1/2 h-full flex flex-col sm:justify-evenly justify-start items-end">

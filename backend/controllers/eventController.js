@@ -1,11 +1,11 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import mongoose from "mongoose";
-
 import { cancelScheduledEvent, scheduleEvent } from "../utils/nodeSchedule.js";
 import { getActiveEvents, updateUserInfo } from "../helpers/index.js";
-import notify from "../utils/notify.js";
+
 const { ObjectId } = mongoose.Types;
+
 //@desc RegisterEvent
 //Route PUT /api/users/event
 // PUBLIC
@@ -21,7 +21,6 @@ const registerEvent = asyncHandler(async (req, res) => {
       await user.events.push(req.body.event);
       const updatedUser = await user.save();
       scheduleEvent(req.body.event, req.user);
-      // notify(req.body.event,req.user.phone)
       res.json({
         _id: updatedUser._id,
         name: updatedUser.name,

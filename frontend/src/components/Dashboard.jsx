@@ -8,8 +8,6 @@ import Avatar from "react-avatar";
 import { useState } from "react";
 import Calendar from "./Calendar";
 import Profile from "./Profile";
-import Pricing from "./Pricing";
-import FeedBack from "./FeedBack";
 import Events from "./Events";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,7 +46,7 @@ throw new Error(error)
     }
   };
   useEffect(() => {
-    const socket = io("https://www.eventwhisper.click");
+    const socket = io("http://localhost:7789");
 
     socket.on("roomId", (roomId) => {
       console.log(`connected to room ${roomId}`);
@@ -90,7 +88,7 @@ throw new Error(error)
             className="w-1/6 h-full  flex  justify-center items-center flex-col"
           >
             <div className="sm:w-1/6 sm:h-1/3 h-3 w-6 bg-gray-100  rounded-t-full"></div>
-            <div className="sm:w-1/6 sm:h-1/3 h-3 w-6  rounded-b-full bg-[#3b3299]"></div>
+            <div className="sm:w-1/6 sm:h-1/3 h-3 w-6  rounded-b-full bg-[#793ede]"></div>
           </motion.button>
           <div
             id="widgets"
@@ -148,7 +146,7 @@ throw new Error(error)
             className="sm:w-3/6 w-2/6  h-full  text-gray-400 flex sm:justify-end justify-center items-center sm:text-[13px] text-[8px] font-[500]"
           >
             <p className="sm:text-[15px] sm:mr-20 sm:ml-0 ml-5 flex sm:w-1/6 
-            w-2/6 border-[1px] items-center sm:justify-around justify-between rounded-lg sm:py-2 sm:shadow-sm p-1 ">
+            w-3/6 border-[1px] items-center sm:justify-around justify-between rounded-lg sm:py-2 sm:shadow-sm p-1 ">
               {isLoggedIn ? (
                 <>
                   <Avatar
@@ -167,10 +165,12 @@ throw new Error(error)
                 </>
               ) : (
                 <Link
-                  className="sm:text-[14px] text-[8px] w-full h-full  text-black sm:rounded-2xl sm:px-0 px-2 sm:py-0 py-[4px] font-[600] border-black flex justify-center items-center "
+                  className="sm:text-[14px] text-[8px] w-full h-full  text-black sm:rounded-2xl sm:px-0  px-2 sm:py-0  font-[600] flex justify-center items-center"
                   to="/login"
                 >
-                  Log in
+
+                   Log in
+
                 </Link>
               )}
             </p>
@@ -179,8 +179,6 @@ throw new Error(error)
         {showWidget.isEvents ? <Events /> : null}
         {showWidget.isCalendar ? <Calendar /> : null}
         {showWidget.isProfile ? <Profile /> : null}
-        {showWidget.isPricing ? <Pricing /> : null}
-        {showWidget.isFeedback ? <FeedBack /> : null}
       </div>
     </>
   );

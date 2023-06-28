@@ -9,6 +9,10 @@ export default {
       fontFamily:{
         body:['PT+Sans'],
         calendar:['Nunito']
+      },
+      backgroundImage: {
+        'profile-page': "url('https://cutewallpaper.org/21/svg-background-image/Wave-Background-With-SVG-CodeSeekco.png')",
+
       }
     },
     

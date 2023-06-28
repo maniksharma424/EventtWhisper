@@ -69,8 +69,9 @@ const Events = () => {
      
       </div>
 
-     {filteredEvents.length <=0 ? <div className="w-full sm:h-[400px] h-[300px] flex flex-col justify-center items-center">
-      <p className="sm:text-[35px] text-[22px] font-[600]">No active events found start creating reminders to get notified!</p>
+     {filteredEvents.length <=0 ? <div className="w-full sm:h-[400px] h-[300px] flex flex-col justify-center items-center sm:text-[35px] text-[22px] font-[200]">
+      <p>  No event found  </p>
+      <p >Go to calendar to get started</p>
      
 
      </div>:<div className="w-full h-fit">
