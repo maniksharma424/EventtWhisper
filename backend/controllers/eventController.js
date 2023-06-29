@@ -3,6 +3,7 @@ import User from "../models/userModel.js";
 import mongoose from "mongoose";
 import { cancelScheduledEvent, scheduleEvent } from "../utils/nodeSchedule.js";
 import { getActiveEvents, updateUserInfo } from "../helpers/index.js";
+import sendAlerts from "../utils/alert.js";
 
 const { ObjectId } = mongoose.Types;
 

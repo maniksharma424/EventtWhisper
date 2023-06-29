@@ -55,7 +55,6 @@ const welcome = async (name,phone) => {
         },
       }
     );
-
   } catch (error) {
  throw new Error(error)
   }

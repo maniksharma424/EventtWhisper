@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
    roomId = socket.id; // Use socket ID as the room ID
   // Join the room
   socket.join(roomId);
-console.log(`new user connected to room ${roomId}`);
+//console.log(`new user connected to room ${roomId}`);
   socket.on("disconnect", () => {
 
   });

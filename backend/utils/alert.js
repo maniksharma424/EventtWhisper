@@ -9,28 +9,39 @@ const sendAlerts = async (event, user) => {
         to: `91${user?.phone}`,
         type: "template",
         template: {
-          name: "eventalert",
+          name: "alert",
           language: {
             code: "en_US",
           },
           components: [
             {
+              type: "header",
+              parameters: [
+                {
+                  type: "image",
+                  image: {
+                    link: "https://cdn-webcache.wimages.net/img/android_app_icon-30dffff8f6e54d2c8a9c76e301ad79e0.png?vsn=d",
+                  },
+                },
+              ],
+            },
+            {
               type: "body",
               parameters: [
                 {
                   type: "text",
-                  text: `${user?.name} this is a reminder for ${event?.name} - ${event?.description}`,
+                  text: `Hi ${user?.name},Name-${event?.name},description-${event?.description}`
                 },
               ],
             },
             {
               type: "button",
-              sub_type: "quick_reply",
-              index: "0",
+              sub_type: "URL",
+              index: "1",
               parameters: [
                 {
-                  type: "payload",
-                  payload:'Than you for using My Cal you will not be notified for any further updates'
+                  type: "text",
+                  text: "https://www.eventwhisper.click",
                 },
               ],
             },
@@ -44,10 +55,9 @@ const sendAlerts = async (event, user) => {
         },
       }
     );
-console.log(response);
+
 
   } catch (error) {
-    console.log(error);
 throw new Error(error)
   }
 };

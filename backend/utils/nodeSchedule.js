@@ -13,7 +13,6 @@ export const scheduleEvent = async (event, user) => {
     event;
   const date = convertToValidDate(day, month, year, hour, minutes, timeZone);
   const jobId = new ObjectId(_id);
-console.log(date);
   const job = schedule.scheduleJob(`${jobId}`, date, () => {
     sendAlerts(event, user);
     handleCompletedEvent(user, event).then((updatedUser) => {
@@ -23,10 +22,7 @@ console.log(date);
 };
 
 export const cancelScheduledEvent = (_id) => {
-  console.log('cancelling start');
   const jobId = new ObjectId(_id);
   const job = schedule.scheduledJobs[`${jobId}`];
   job.cancel();
-  console.log(job);
-
 };
