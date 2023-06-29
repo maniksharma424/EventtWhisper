@@ -6,8 +6,10 @@ import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import {motion} from 'framer-motion'
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const {userInfo} = useSelector(state=>state.auth)
+  const navigate = useNavigate()
 
   return (
     <div id="body" className="sm:p-12 p-8 h-[800px] w-full">
@@ -51,10 +53,10 @@ Ensure that you never miss any reminders by receiving them directly on WhatsApp.
                 Leonard Lauren
               </p>
               <p className="sm:text-[10px] text-[6px] text-gray-300">
-                <span>Tasks</span> <span className="sm:ml-5">Completed</span>
+                <span>Events</span> <span className="sm:ml-5 ml-5">Completed</span>
               </p>
               <p className="sm:text-[13px] text-[10px] text-white">
-                <span>30</span> <span className="sm:ml-8">18</span>
+                <span>30</span> <span className="sm:ml-8 ml-7">18</span>
               </p>
             </div>
             <div className="w-1/3 h-full flex justify-center items-center ">
@@ -76,7 +78,7 @@ Ensure that you never miss any reminders by receiving them directly on WhatsApp.
             <Link to='/dashboard' className="text-white sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-black border-[1px] flex justify-center items-center">
             {userInfo?.name ? <span>Calendar</span>:<span>Try for free</span>}  
             </Link>
-            <Link className=" sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-[#c599f2] border-[1px] text-black flex justify-center items-center">
+            <Link to='/dashboard' className=" sm:px-12 px-3  sm:h-[50px] h-[25px] sm:rounded-3xl sm:text-[12px] text-[10px] rounded-lg border-black bg-[#c599f2] border-[1px] text-black flex justify-center items-center">
               Learn more
             </Link>
           </div>
@@ -133,19 +135,32 @@ Ensure that you never miss any reminders by receiving them directly on WhatsApp.
           </div>
           <div
             id="feature-btns"
-            className="w-full h-1/3 flex  sm:justify-between justify-evenly items-center"
+            className="w-full h-1/3 flex  justify-between items-center"
           >
-            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
+            <motion.button
+             onClick={()=>{
+              navigate('/dashboard')
+            }}
+            className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
-              <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" />{" "}
+              <input 
+              type="radio" className="sm:w-3 w-1 sm:h-3 h-1" />{" "}
               Experience the app
             </motion.button>
-            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
+            <motion.button
+            onClick={()=>{
+              navigate('/dashboard')
+            }}
+            className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Unlock
               event management
             </motion.button>
-            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
+            <motion.button
+            onClick={()=>{
+              navigate('/dashboard')
+            }}
+            className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Schedule
               with ease
@@ -256,19 +271,31 @@ Ensure that you never miss any reminders by receiving them directly on WhatsApp.
 
           <div
             id="feature-btns"
-            className="w-full h-1/3 flex justify-evenly items-center"
+            className="w-full h-1/3 flex sm:justify-evenly justify-between items-center"
           >
-            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] bg-[#c599f2]">
+            <motion.button
+            onClick={()=>{
+              navigate('/dashboard')
+            }}
+            className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] bg-[#c599f2]">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Try it
               now
             </motion.button>
-            <motion.button className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]  bg-[#4551d1] text-white">
+            <motion.button 
+            onClick={()=>{
+              navigate('/dashboard')
+            }}
+            className="border-[1px] border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300]  bg-[#4551d1] text-white">
               {" "}
               <input type="radio" className="sm:w-3 w-1 sm:h-3 h-1" /> Stay
               organized
             </motion.button>
-            <motion.button className="border-[1px]   border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] flex  items-center bg-[#27c22c]">
+            <motion.button
+            onClick={()=>{
+              navigate('/dashboard')
+            }}
+            className="border-[1px]   border-black h-1/3 text-[6px] sm:text-[15px] px-1 sm:px-4 font-[300] flex  items-center bg-[#27c22c]">
               {" "}
               <IoIosAddCircleOutline className="text-white bg-black mx-2 rounded-full" />{" "}
               Experience seamless planning

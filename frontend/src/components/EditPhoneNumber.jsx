@@ -30,7 +30,7 @@ const EditPhoneNumber = ({ handleEdit }) => {
        initial={{ x: "100%", y: 0 }}
             animate={{ x: 0, y: 0 }}
             transition={{ duration: 0.2 }}
-      className="sm:w-1/3 w-3/5 h-full border-[1px] absolute right-0  bg-white py-24 sm:px-12 px-4"
+      className="sm:w-1/3 w-3/5 h-full border-[1px] absolute right-0 bg-white py-10 top-[40px]  sm:px-12 px-4 "
     >
       <div className="flex flex-col h-1/4 justify-around items-center">
         <button

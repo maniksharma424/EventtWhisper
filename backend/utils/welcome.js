@@ -41,7 +41,7 @@ const welcome = async (name,phone) => {
               parameters: [
                 {
                   type: "text",
-                  text: "https://www.eventwhisper.click",
+                  text: "https://www.eventwhisper.click/dashboard",
                 },
               ],
             },

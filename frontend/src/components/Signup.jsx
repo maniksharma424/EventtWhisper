@@ -108,7 +108,7 @@ const Signup = () => {
             </div>
             <div className="w-full">
               <p className="sm:text-[13px] text-[10px] sm:font-[600] text-gray-700">
-               Confirm passowrd
+               Confirm password
               </p>
               <input
                value={confrimPassword}

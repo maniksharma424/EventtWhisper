@@ -62,7 +62,7 @@ const Profile = () => {
             </p>
           </div>
           <p className="sm:mt-12 mt-3 text-gray-600 font-[600] text-[16px] sm:font-[800] sm:text-[20px]">
-            AccountInfo
+            Account Info
           </p>
           <div className="w-full sm:h-1/4 h-1/4 border-t-[1px] flex flex-col sm:justify-between justify-around sm:py-2 ">
             <p className="w-full flex justify-between sm:text-[18px] text-[15px] font-[600]">

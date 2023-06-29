@@ -31,7 +31,7 @@ const Events = () => {
 
 
   return (
-    <div className="w-full h-full  sm:px-20 sm:py-10 px-5 py-2">
+    <div className="w-full h-full  sm:px-20 sm:py-10 px-5 py-10 overflow-scroll">
       <div className="sm:h-1/6 w-full ">
         <h1 className="text-[#141414] sm:text-[35px] text-[20px] sm:font-[600]">
           Events
@@ -53,7 +53,7 @@ const Events = () => {
             eventType.upcomming ? "bg-white" : "bg-gray-100 text-[#C7C6C6]"
           }`}
         >
-          Upcomming
+          Upcoming
         </motion.button>
         <motion.button
           onClick={() => {

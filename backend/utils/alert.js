@@ -41,7 +41,7 @@ const sendAlerts = async (event, user) => {
               parameters: [
                 {
                   type: "text",
-                  text: "https://www.eventwhisper.click",
+                  text: "https://www.eventwhisper.click/dashboard",
                 },
               ],
             },
