@@ -13,9 +13,9 @@ const Home = () => {
     <div id="body" className="sm:p-12 p-8 h-[800px] w-full">
       <div id="upper" className="h-1/2 w-full  flex flex-wrap">
         <div className="w-1/2 h-full text-[30px] sm:text-[70px] sm:font-[700]">
-          <p>Keep your reminders</p>
-          <p>organised in just</p>
-          <p>one application</p>
+          <p>Effortless WhatsApp </p>
+          <p>Updates Never Miss Important Events!</p>
+
           <p className="sm:text-[15px] text-[10px] font-[200]">
             
 Ensure that you never miss any reminders by receiving them directly on WhatsApp.
