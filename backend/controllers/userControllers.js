@@ -94,13 +94,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       const phone = req.body.phone;
       const userExists = await User.findOne({ phone });
       if (userExists) {
-        res.status(401)
+        res.status(401);
         throw new Error("User with this phone number already exists");
       } else {
         user.phone = req.body.phone || user.phone;
       }
     }
-
     if (req.body.password) {
       user.password = req.body.password;
     }

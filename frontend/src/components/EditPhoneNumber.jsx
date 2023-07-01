@@ -15,13 +15,18 @@ const EditPhoneNumber = ({ handleEdit }) => {
   const [logoutApiCall] = useLogoutMutation();
 
   const handleSubmit = async () => {
-    try {
-      await update({ phone: phoneNumber }).unwrap();
-      await logoutApiCall().unwrap();
-      dispatch(logout());
-      navigate("/login");
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
+    if(phoneNumber.length >=10){
+      try {
+        await update({ phone: phoneNumber }).unwrap();
+        await logoutApiCall().unwrap();
+        dispatch(logout());
+        navigate("/login");
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+    else{
+      toast.error('Invalid Phone Number');
     }
   };
 
