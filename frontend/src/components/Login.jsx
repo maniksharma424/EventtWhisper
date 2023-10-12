@@ -37,7 +37,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="w-full sm:h-[830px] h-[500px] relative sm:top-0 top-[100px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0] ">
+      <div className="w-full sm:h-screen h-[500px] relative sm:top-0 top-[100px] sm:flex  flex-wrap justify-center items-center bg-[#e9e4f0] ">
         <div className=" sm:w-2/5 sm:h-4/5 w-full h-full sm:rounded-l-xl flex  justify-center items-center bg-white sm:shadow-xl">
           <div className=" w-2/3 sm:h-2/3 h-full flex flex-col justify-evenly items-start ">
             <div className="w-full flex justify-around items-center sm:hidden h-1/6">
@@ -47,7 +47,7 @@ const Login = () => {
                 className="w-2/5 h-5/5 rounded-full"
               />
             </div>
-            <div className="sm:w-3/5 w-full flex flex-col justify-center items-center">
+            <div className="w-full flex flex-col justify-center items-center">
               <h2 className="sm:text-[30px] sm:font-[500] text-[20px] font-[300]">
                 Welcome back
               </h2>
@@ -72,7 +72,7 @@ const Login = () => {
             </div>
             <div className="w-full">
               <p className="sm:text-[13px] text-[10px] sm:font-[600] text-gray-700">
-                Passowrd
+                Password
               </p>
               <input
                 id="password"
